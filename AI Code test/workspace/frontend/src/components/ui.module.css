@@ -1,0 +1,58 @@
+/* Shared building blocks used by every page (tokens from styles/global.css). */
+.page { max-width: 1200px; margin: 0 auto; padding: 20px var(--gutter) 48px; }
+
+.header { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.title { font-size: 20px; font-weight: 650; margin: 0; }
+.subtitle { color: var(--text-muted); margin: 2px 0 0; }
+
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px; }
+.card + .card { margin-top: 16px; }
+.cardTitle { font-size: 15px; font-weight: 650; margin: 0 0 12px; }
+
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px 16px; }
+.stack { display: grid; gap: 12px; }
+
+.field { display: grid; gap: 4px; min-width: 0; align-content: start; }
+.label { font-weight: 550; font-size: 13px; }
+.hint { color: var(--text-muted); font-size: 12.5px; }
+.fieldError { color: var(--danger); font-size: 12.5px; margin: 0; }
+
+.button {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  min-height: 36px; padding: 6px 14px; border-radius: var(--radius-sm);
+  border: 1px solid var(--border); background: var(--surface); color: var(--text);
+  cursor: pointer; text-decoration: none; white-space: nowrap; font-weight: 550;
+}
+.button:hover { background: var(--surface-2); }
+.button:disabled { opacity: 0.55; cursor: not-allowed; }
+.primary { background: var(--primary); border-color: var(--primary); color: var(--primary-contrast); }
+.primary:hover { background: var(--primary-hover); }
+.danger { color: var(--danger); border-color: var(--danger); }
+.danger:hover { background: var(--danger-soft); }
+.small { min-height: 30px; padding: 3px 10px; font-size: 13px; }
+.linkButton { background: none; border: none; color: var(--primary); padding: 0; cursor: pointer; text-decoration: underline; }
+
+.alert { background: var(--danger-soft); color: var(--danger); border-radius: var(--radius-sm); padding: 10px 12px; margin: 0 0 12px; }
+.success { background: var(--success-soft); color: var(--success); border-radius: var(--radius-sm); padding: 10px 12px; margin: 0 0 12px; }
+.info { background: var(--primary-soft); color: var(--text); border-radius: var(--radius-sm); padding: 10px 12px; margin: 0 0 12px; }
+
+.badge { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: 12px; font-weight: 600; background: var(--surface-2); color: var(--text-muted); white-space: nowrap; }
+.badgeSuccess { background: var(--success-soft); color: var(--success); }
+.badgeWarning { background: var(--warning-soft); color: var(--warning); }
+.badgeDanger { background: var(--danger-soft); color: var(--danger); }
+.badgePrimary { background: var(--primary-soft); color: var(--primary); }
+
+.tableWrap { overflow-x: auto; }
+.table { width: 100%; border-collapse: collapse; }
+.table th, .table td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.table th { font-size: 12.5px; color: var(--text-muted); font-weight: 600; white-space: nowrap; }
+
+.muted { color: var(--text-muted); }
+.mono { font-family: var(--mono); font-size: 12.5px; word-break: break-all; }
+.empty { color: var(--text-muted); text-align: center; padding: 24px; }
+
+@media (max-width: 640px) {
+  .page { padding-top: 14px; }
+  .title { font-size: 18px; }
+}

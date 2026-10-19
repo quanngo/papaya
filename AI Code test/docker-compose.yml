@@ -1,0 +1,15 @@
+# Local run: docker compose up --build   ->   http://localhost:8080
+services:
+  app:
+    build: .
+    image: claimconfig:local
+    ports:
+      - "${HOST_PORT:-8080}:8080"
+    volumes:
+      - claimconfig-data:/app/data   # SQLite database (migrations + seed run on first start)
+    # environment:
+    #   DATABASE_URL: "libsql://<db>-<org>.turso.io?authToken=<token>"   # use Turso instead of the local file
+    restart: unless-stopped
+
+volumes:
+  claimconfig-data:

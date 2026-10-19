@@ -1,0 +1,8 @@
+# Internal skills of another project: not published
+AI Code test/.claude/skills/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

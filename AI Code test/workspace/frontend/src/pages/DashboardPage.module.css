@@ -1,0 +1,25 @@
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 16px; }
+.stat {
+  display: grid; gap: 2px; padding: 14px 16px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
+  color: var(--text); text-decoration: none;
+}
+.stat:hover { border-color: var(--primary); }
+.statValue { font-size: 26px; font-weight: 700; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.statLabel { color: var(--text-muted); font-size: 13px; }
+.warning .statValue { color: var(--warning); }
+.success .statValue { color: var(--success); }
+
+.columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 16px; align-items: start; }
+.columns > * + * { margin-top: 0 !important; }
+.cardHead { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.list { list-style: none; margin: 0; padding: 0; }
+.list li { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 8px 0; border-top: 1px solid var(--border); }
+.itemMain { flex: 1 1 180px; min-width: 0; font-weight: 550; color: var(--text); }
+a.itemMain { color: var(--primary); }
+.itemMeta { color: var(--text-muted); font-size: 12.5px; }
+.itemLink { font-size: 12.5px; }
+
+@media (max-width: 640px) {
+  .columns { grid-template-columns: minmax(0, 1fr); }
+}

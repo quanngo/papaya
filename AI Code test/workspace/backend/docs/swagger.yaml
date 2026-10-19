@@ -1,0 +1,1469 @@
+basePath: /api/v1
+definitions:
+  api.Response:
+    properties:
+      code:
+        example: 200
+        type: integer
+      data: {}
+      error_text:
+        example: ""
+        type: string
+      message:
+        example: OK
+        type: string
+    type: object
+  models.ApprovalConfig:
+    properties:
+      auto_approval_threshold:
+        example: 10000
+        type: number
+      tiers:
+        items:
+          $ref: '#/definitions/models.Tier'
+        type: array
+    type: object
+  models.ApprovalResult:
+    properties:
+      approver_role:
+        example: assessor
+        type: string
+      auto_approved:
+        example: false
+        type: boolean
+      routing:
+        enum:
+        - auto_approved
+        - manual_review
+        - rejected
+        example: manual_review
+        type: string
+      threshold:
+        example: 5000
+        type: number
+      tier:
+        $ref: '#/definitions/models.Tier'
+      tier_index:
+        example: 0
+        type: integer
+    type: object
+  models.BatchResult:
+    properties:
+      results:
+        items:
+          $ref: '#/definitions/models.ProcessResult'
+        type: array
+    type: object
+  models.BrandingConfig:
+    properties:
+      company_name:
+        example: CareLink Insurance
+        type: string
+      logo_url:
+        example: https://placehold.co/160x48?text=CareLink
+        type: string
+      primary_color:
+        example: '#6A1B9A'
+        type: string
+      secondary_color:
+        example: '#FFC107'
+        type: string
+    type: object
+  models.Change:
+    properties:
+      kind:
+        enum:
+        - added
+        - removed
+        - changed
+        example: changed
+        type: string
+      left:
+        type: object
+      module:
+        example: approval
+        type: string
+      path:
+        example: approval.auto_approval_threshold
+        type: string
+      right:
+        type: object
+    type: object
+  models.ChangePasswordRequest:
+    properties:
+      current_password:
+        example: "123456"
+        type: string
+      new_password:
+        example: a-much-longer-password
+        type: string
+    type: object
+  models.Claim:
+    properties:
+      amount:
+        example: 15000
+        minimum: 0
+        type: number
+      claim_type:
+        enum:
+        - OUTPATIENT
+        - INPATIENT
+        - DENTAL
+        - MATERNITY
+        - OPTICAL
+        example: OUTPATIENT
+        type: string
+      custom_fields:
+        type: object
+      documents:
+        example:
+        - invoice
+        - prescription
+        items:
+          type: string
+        type: array
+      submitted_at:
+        description: nil = now
+        example: "2026-10-16T09:00:00+07:00"
+        type: string
+    type: object
+  models.ClaimList:
+    properties:
+      claims:
+        items:
+          $ref: '#/definitions/models.ClaimRecord'
+        type: array
+    type: object
+  models.ClaimRecord:
+    properties:
+      accepted:
+        type: boolean
+      amount:
+        example: 15000
+        type: number
+      approver_role:
+        type: string
+      claim_type:
+        example: OUTPATIENT
+        type: string
+      config_version:
+        example: 1
+        type: integer
+      created_at:
+        type: string
+      created_by:
+        type: integer
+      id:
+        type: string
+      result:
+        $ref: '#/definitions/models.ProcessResult'
+      routing:
+        example: auto_approved
+        type: string
+      sla_deadline:
+        type: string
+      submitted_at:
+        type: string
+      tenant_id:
+        type: string
+      tenant_slug:
+        example: safeguard
+        type: string
+    type: object
+  models.ClaimTypesConfig:
+    properties:
+      documents:
+        additionalProperties:
+          $ref: '#/definitions/models.DocumentRules'
+        type: object
+      enabled:
+        example:
+        - OUTPATIENT
+        - OPTICAL
+        items:
+          type: string
+        type: array
+    type: object
+  models.CreateTenantRequest:
+    properties:
+      config:
+        $ref: '#/definitions/models.TenantConfig'
+      note:
+        example: Onboard CareLink
+        type: string
+      slug:
+        example: carelink
+        type: string
+    type: object
+  models.CustomField:
+    properties:
+      key:
+        example: policy_number
+        type: string
+      label:
+        example: Policy Number
+        type: string
+      options:
+        items:
+          type: string
+        type: array
+      pattern:
+        example: ^CL-[0-9]{6}$
+        type: string
+      required:
+        example: true
+        type: boolean
+      type:
+        enum:
+        - text
+        - number
+        - select
+        example: text
+        type: string
+    type: object
+  models.CustomFieldResult:
+    properties:
+      code:
+        description: issue code when invalid
+        example: ""
+        type: string
+      key:
+        example: employee_id
+        type: string
+      label:
+        example: Employee ID
+        type: string
+      required:
+        example: true
+        type: boolean
+      text:
+        example: ""
+        type: string
+      type:
+        example: text
+        type: string
+      valid:
+        example: true
+        type: boolean
+      value:
+        example: EMP-12345
+        type: string
+    type: object
+  models.DiffResult:
+    properties:
+      a:
+        $ref: '#/definitions/models.DiffSide'
+      b:
+        $ref: '#/definitions/models.DiffSide'
+      changes:
+        items:
+          $ref: '#/definitions/models.Change'
+        type: array
+    type: object
+  models.DiffSide:
+    properties:
+      name:
+        example: SafeGuard Insurance
+        type: string
+      slug:
+        example: safeguard
+        type: string
+      tenant_id:
+        type: string
+      version:
+        example: 1
+        type: integer
+    type: object
+  models.DocumentRules:
+    properties:
+      optional:
+        example:
+        - lab_results
+        items:
+          type: string
+        type: array
+      required:
+        example:
+        - invoice
+        - prescription
+        items:
+          type: string
+        type: array
+    type: object
+  models.DocumentsResult:
+    properties:
+      missing:
+        example:
+        - medical_report
+        items:
+          type: string
+        type: array
+      optional:
+        example:
+        - lab_results
+        items:
+          type: string
+        type: array
+      required:
+        example:
+        - invoice
+        - prescription
+        - medical_report
+        items:
+          type: string
+        type: array
+    type: object
+  models.EscalationRule:
+    properties:
+      after_breach_days:
+        example: 1
+        type: integer
+      notify:
+        example:
+        - team_lead
+        items:
+          type: string
+        type: array
+    type: object
+  models.EventRule:
+    properties:
+      channels:
+        example:
+        - email
+        - webhook
+        items:
+          type: string
+        type: array
+      enabled:
+        example: true
+        type: boolean
+      template:
+        description: empty = default template
+        example: ""
+        type: string
+    type: object
+  models.HealthStatus:
+    properties:
+      db:
+        example: ok
+        type: string
+      status:
+        example: ok
+        type: string
+      version:
+        example: 1.0.0
+        type: string
+    type: object
+  models.Issue:
+    properties:
+      code:
+        example: TIER_GAP
+        type: string
+      params:
+        type: object
+      path:
+        example: approval.tiers[1].min_amount
+        type: string
+      text:
+        example: Tier must start at 100000 (where the previous tier ends).
+        type: string
+    type: object
+  models.LocaleRequest:
+    properties:
+      locale:
+        enum:
+        - vi
+        - en
+        example: en
+        type: string
+    type: object
+  models.LoginRequest:
+    properties:
+      email:
+        example: admin@papaya.com
+        type: string
+      password:
+        example: "123456"
+        type: string
+      remember_me:
+        example: false
+        type: boolean
+    type: object
+  models.LogoutAllResponse:
+    properties:
+      revoked_sessions:
+        example: 2
+        type: integer
+    type: object
+  models.NotificationResult:
+    properties:
+      channels:
+        example:
+        - email
+        - sms
+        items:
+          type: string
+        type: array
+      default_template:
+        example: true
+        type: boolean
+      event:
+        example: claim_submitted
+        type: string
+      template:
+        example: Your claim has been received and is being processed.
+        type: string
+    type: object
+  models.NotificationsConfig:
+    properties:
+      events:
+        additionalProperties:
+          $ref: '#/definitions/models.EventRule'
+        type: object
+      webhook_url:
+        example: https://hooks.example.com/claims
+        type: string
+    type: object
+  models.PreviewClaimRequest:
+    properties:
+      claim:
+        $ref: '#/definitions/models.Claim'
+      config:
+        $ref: '#/definitions/models.TenantConfig'
+      tenant_id:
+        example: healthfirst
+        type: string
+    type: object
+  models.ProcessBatchRequest:
+    properties:
+      claim:
+        $ref: '#/definitions/models.Claim'
+      tenant_ids:
+        example:
+        - safeguard
+        - healthfirst
+        - govhealth
+        items:
+          type: string
+        type: array
+    type: object
+  models.ProcessClaimRequest:
+    properties:
+      claim:
+        $ref: '#/definitions/models.Claim'
+      tenant_id:
+        description: id or slug
+        example: 60244e2b-abde-4cf1-ab77-c7bc8d4cf6d9
+        type: string
+    type: object
+  models.ProcessResult:
+    properties:
+      accepted:
+        example: true
+        type: boolean
+      amount:
+        example: 15000
+        type: number
+      approval:
+        $ref: '#/definitions/models.ApprovalResult'
+      claim_id:
+        description: set when the claim was stored
+        example: 0d6c3f0e-6a51-4d55-9a8f-93a4b0e6c1a2
+        type: string
+      claim_type:
+        example: OUTPATIENT
+        type: string
+      custom_fields:
+        items:
+          $ref: '#/definitions/models.CustomFieldResult'
+        type: array
+      documents:
+        $ref: '#/definitions/models.DocumentsResult'
+      errors:
+        items:
+          $ref: '#/definitions/models.Issue'
+        type: array
+      notifications:
+        items:
+          $ref: '#/definitions/models.NotificationResult'
+        type: array
+      sla:
+        $ref: '#/definitions/models.SLAResult'
+      tenant:
+        $ref: '#/definitions/models.TenantRef'
+      trace:
+        items:
+          $ref: '#/definitions/models.TraceStep'
+        type: array
+    type: object
+  models.RoleRef:
+    properties:
+      code:
+        example: operator
+        type: string
+      name:
+        example: Operator
+        type: string
+    type: object
+  models.RollbackRequest:
+    properties:
+      note:
+        example: Revert threshold change
+        type: string
+      version:
+        example: 1
+        type: integer
+    type: object
+  models.SLAConfig:
+    properties:
+      default_days:
+        example: 3
+        type: integer
+      escalation:
+        items:
+          $ref: '#/definitions/models.EscalationRule'
+        type: array
+      targets:
+        additionalProperties:
+          type: integer
+        description: claim type -> business days
+        type: object
+      timezone:
+        example: Asia/Ho_Chi_Minh
+        type: string
+    type: object
+  models.SLAResult:
+    properties:
+      business_days:
+        example: 7
+        type: integer
+      deadline:
+        example: "2026-10-27T09:00:00+07:00"
+        type: string
+      escalation:
+        items:
+          $ref: '#/definitions/models.EscalationRule'
+        type: array
+      submitted_at:
+        example: "2026-10-16T09:00:00+07:00"
+        type: string
+      timezone:
+        example: Asia/Ho_Chi_Minh
+        type: string
+    type: object
+  models.SessionUser:
+    properties:
+      auth_method:
+        example: password
+        type: string
+      display_name:
+        example: Operations Demo
+        type: string
+      email:
+        example: operator@papaya.com
+        type: string
+      id:
+        example: 2
+        type: integer
+      locale:
+        example: vi
+        type: string
+      permission_names:
+        additionalProperties:
+          type: string
+        type: object
+      permissions:
+        example:
+        - tenants.read
+        - tenants.manage
+        - claims.read
+        - claims.process
+        items:
+          type: string
+        type: array
+      role:
+        $ref: '#/definitions/models.RoleRef'
+    type: object
+  models.Tenant:
+    properties:
+      archived_at:
+        example: ""
+        type: string
+      created_at:
+        example: "2026-10-17T08:00:00.000Z"
+        type: string
+      created_by:
+        type: integer
+      current_version:
+        example: 1
+        type: integer
+      id:
+        example: 60244e2b-abde-4cf1-ab77-c7bc8d4cf6d9
+        type: string
+      name:
+        example: SafeGuard Insurance
+        type: string
+      slug:
+        example: safeguard
+        type: string
+      updated_at:
+        example: "2026-10-17T08:00:00.000Z"
+        type: string
+    type: object
+  models.TenantConfig:
+    properties:
+      approval:
+        $ref: '#/definitions/models.ApprovalConfig'
+      branding:
+        $ref: '#/definitions/models.BrandingConfig'
+      claim_types:
+        $ref: '#/definitions/models.ClaimTypesConfig'
+      custom_fields:
+        items:
+          $ref: '#/definitions/models.CustomField'
+        type: array
+      notifications:
+        $ref: '#/definitions/models.NotificationsConfig'
+      sla:
+        $ref: '#/definitions/models.SLAConfig'
+    type: object
+  models.TenantConfigMeta:
+    properties:
+      channels:
+        example:
+        - email
+        - sms
+        - webhook
+        items:
+          type: string
+        type: array
+      claim_types:
+        example:
+        - OUTPATIENT
+        - INPATIENT
+        - DENTAL
+        - MATERNITY
+        - OPTICAL
+        items:
+          type: string
+        type: array
+      custom_field_types:
+        example:
+        - text
+        - number
+        - select
+        items:
+          type: string
+        type: array
+      modules:
+        example:
+        - branding
+        - claim_types
+        - custom_fields
+        - approval
+        - sla
+        - notifications
+        items:
+          type: string
+        type: array
+      notification_events:
+        example:
+        - claim_submitted
+        - approved
+        - rejected
+        - payment_sent
+        items:
+          type: string
+        type: array
+    type: object
+  models.TenantDetail:
+    properties:
+      archived_at:
+        example: ""
+        type: string
+      config:
+        $ref: '#/definitions/models.TenantConfig'
+      created_at:
+        example: "2026-10-17T08:00:00.000Z"
+        type: string
+      created_by:
+        type: integer
+      current_version:
+        example: 1
+        type: integer
+      id:
+        example: 60244e2b-abde-4cf1-ab77-c7bc8d4cf6d9
+        type: string
+      name:
+        example: SafeGuard Insurance
+        type: string
+      slug:
+        example: safeguard
+        type: string
+      updated_at:
+        example: "2026-10-17T08:00:00.000Z"
+        type: string
+    type: object
+  models.TenantList:
+    properties:
+      tenants:
+        items:
+          $ref: '#/definitions/models.Tenant'
+        type: array
+    type: object
+  models.TenantRef:
+    properties:
+      config_version:
+        description: 0 = unsaved config (preview)
+        example: 1
+        type: integer
+      id:
+        example: 60244e2b-abde-4cf1-ab77-c7bc8d4cf6d9
+        type: string
+      name:
+        example: SafeGuard Insurance
+        type: string
+      slug:
+        example: safeguard
+        type: string
+    type: object
+  models.TenantVersion:
+    properties:
+      config:
+        $ref: '#/definitions/models.TenantConfig'
+      created_at:
+        example: "2026-10-17T08:00:00.000Z"
+        type: string
+      created_by:
+        type: integer
+      created_by_email:
+        example: operator@papaya.com
+        type: string
+      is_current:
+        type: boolean
+      note:
+        example: Raise auto-approval threshold
+        type: string
+      rolled_back_from:
+        type: integer
+      source:
+        enum:
+        - create
+        - update
+        - rollback
+        example: update
+        type: string
+      tenant_id:
+        type: string
+      version:
+        example: 2
+        type: integer
+    type: object
+  models.Tier:
+    properties:
+      max_amount:
+        example: 100000
+        type: number
+        x-nullable: true
+      min_amount:
+        example: 10000
+        type: number
+      role:
+        example: assessor
+        type: string
+    type: object
+  models.TraceStep:
+    properties:
+      code:
+        example: TIER_MATCHED
+        type: string
+      module:
+        example: approval
+        type: string
+      params:
+        type: object
+      text:
+        example: 'Amount 15000 falls in tier [5000, 50000): assessor.'
+        type: string
+    type: object
+  models.UpdateTenantRequest:
+    properties:
+      base_version:
+        example: 1
+        type: integer
+      config:
+        $ref: '#/definitions/models.TenantConfig'
+      note:
+        example: Raise auto-approval threshold
+        type: string
+    type: object
+  models.ValidateConfigRequest:
+    properties:
+      config:
+        $ref: '#/definitions/models.TenantConfig'
+    type: object
+  models.ValidationResult:
+    properties:
+      issues:
+        items:
+          $ref: '#/definitions/models.Issue'
+        type: array
+      valid:
+        example: false
+        type: boolean
+    type: object
+  models.VersionList:
+    properties:
+      versions:
+        items:
+          $ref: '#/definitions/models.TenantVersion'
+        type: array
+    type: object
+info:
+  contact: {}
+  description: |-
+    Tenant configuration (versioned, with diff and rollback) and runtime claim processing.
+    Every endpoint answers HTTP 200 with {code, message, error_text, data[]}: the real status is in `code`, a stable error code in `message`, and the payload is `data[0]`.
+    Authentication uses an HttpOnly session cookie. In this UI, run POST /auth/login first (e.g. admin@papaya.com / 123456); the browser then sends the cookie with every request.
+  title: Multi-Tenant Claim Config API
+  version: "1.0"
+paths:
+  /auth/change-password:
+    post:
+      consumes:
+      - application/json
+      description: |-
+        Signs out the user's other sessions; this one stays.
+        Errors: BAD_REQUEST, INVALID_CURRENT_PASSWORD, PASSWORD_TOO_SHORT, PASSWORD_TOO_LONG, UNAUTHENTICATED, CROSS_ORIGIN.
+      parameters:
+      - description: Current and new password
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.ChangePasswordRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.Response'
+      summary: Change own password
+      tags:
+      - auth
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: |-
+        Sets an HttpOnly session cookie (persistent for remember-me days when remember_me is true, otherwise until the browser closes).
+        In Swagger UI, call this first: the cookie is then sent with every other request.
+        Errors (in `message`): BAD_REQUEST, INVALID_CREDENTIALS (also for unknown/disabled accounts), ACCOUNT_LOCKED, CROSS_ORIGIN.
+      parameters:
+      - description: 'Credentials (seeded: admin@papaya.com / 123456)'
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/api.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.SessionUser'
+                  type: array
+              type: object
+      summary: Sign in with email and password
+      tags:
+      - auth
+  /auth/logout:
+    post:
+      description: Revokes the current session and clears the cookie. Always succeeds.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.Response'
+      summary: Sign out this browser
+      tags:
+      - auth
+  /auth/logout-all:
+    post:
+      description: 'Requires login. Errors: UNAUTHENTICATED, CROSS_ORIGIN.'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/api.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.LogoutAllResponse'
+                  type: array
+              type: object
+      summary: Sign out every session of the current user
+      tags:
+      - auth
+  /auth/me:
+    get:
+      description: |-
+        The signed-in user with role, permission codes, their names in the user's language, and locale.
+        Errors: UNAUTHENTICATED.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/api.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.SessionUser'
+                  type: array
+              type: object
+      summary: Current user
+      tags:
+      - auth
+  /auth/me/locale:
+    put:
+      consumes:
+      - application/json
+      description: 'Errors: BAD_REQUEST, LOCALE_UNSUPPORTED, UNAUTHENTICATED, CROSS_ORIGIN.'
+      parameters:
+      - description: vi or en
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.LocaleRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/api.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.SessionUser'
+                  type: array
+              type: object
+      summary: Save the UI language
+      tags:
+      - auth
+  /claims:
+    get:
+      description: 'Newest first. Requires permission `claims.read`. Errors: TENANT_NOT_FOUND.'
+      parameters:
+      - description: Only this tenant (id or slug)
+        in: query
+        name: tenant_id
+        type: string
+      - description: Max rows (default 50, max 200)
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/api.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.ClaimList'
+                  type: array
+              type: object
+      summary: Processed claims
+      tags:
+      - claims
+  /claims/preview:
+    post:
+      consumes:
+      - application/json
+      description: |-
+        Runs the same engine as /claims/process but stores nothing. Send tenant_id for a saved tenant, or config for an unsaved one (the edit form); with both, config wins and tenant_id only names it.
+        A claim the tenant does not accept still answers code 200 with data[0].accepted=false and data[0].errors.
+        Requires permission `tenants.read`. Errors: BAD_REQUEST, TENANT_REQUIRED, CONFIG_INVALID, CLAIM_TYPE_REQUIRED, CLAIM_TYPE_UNKNOWN, CLAIM_AMOUNT_INVALID, TENANT_NOT_FOUND, TENANT_ARCHIVED.
+      parameters:
+      - description: Tenant or config, plus the claim
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.PreviewClaimRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/api.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.ProcessResult'
+                  type: array
+              type: object
+      summary: Preview how a claim would be processed
+      tags:
+      - claims
+  /claims/process:
+    post:
+      consumes:
+      - application/json
+      description: |-
+        Returns required documents, approval routing (tier and approver role), notifications with channels, the SLA deadline and custom-field validation, and stores the claim with the config version used.
+        Requires permission `claims.process`. Errors: BAD_REQUEST, TENANT_REQUIRED, CLAIM_TYPE_REQUIRED, CLAIM_TYPE_UNKNOWN, CLAIM_AMOUNT_INVALID, TENANT_NOT_FOUND, TENANT_ARCHIVED.
+      parameters:
+      - description: Tenant id or slug, and the claim
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.ProcessClaimRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/api.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.ProcessResult'
+                  type: array
+              type: object
+      summary: processClaim(tenantId, claimData)
+      tags:
+      - claims
+  /claims/process-batch:
+    post:
+      consumes:
+      - application/json
+      description: |-
+        Demonstrates that identical claims are handled differently per tenant. Empty tenant_ids = every active tenant. Each result is stored like /claims/process.
+        Requires permission `claims.process`. Errors: as /claims/process.
+      parameters:
+      - description: Tenants (ids or slugs) and the claim
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.ProcessBatchRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/api.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.BatchResult'
+                  type: array
+              type: object
+      summary: Process one claim against several tenants
+      tags:
+      - claims
+  /configs/defaults:
+    get:
+      description: A minimal valid config to prefill the "new tenant" form. Requires
+        permission `tenants.manage`.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/api.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.TenantConfig'
+                  type: array
+              type: object
+      summary: Starting config for a new tenant
+      tags:
+      - configs
+  /configs/validate:
+    post:
+      consumes:
+      - application/json
+      description: |-
+        Returns every issue with its path (e.g. approval.tiers[1].min_amount), code and translated text. code is 200 even when the config is invalid; check data[0].valid.
+        Requires permission `tenants.manage`. Errors: BAD_REQUEST, CONFIG_REQUIRED.
+      parameters:
+      - description: Config to check
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.ValidateConfigRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/api.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.ValidationResult'
+                  type: array
+              type: object
+      summary: Validate a config without saving
+      tags:
+      - configs
+  /health:
+    get:
+      description: Liveness and database connectivity. Public.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/api.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.HealthStatus'
+                  type: array
+              type: object
+      summary: Health check
+      tags:
+      - health
+  /meta/tenant-config:
+    get:
+      description: |-
+        Claim types, notification events, channels, custom field types and module names, so the UI hard-codes none of them.
+        Requires permission `tenants.read`.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/api.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.TenantConfigMeta'
+                  type: array
+              type: object
+      summary: Config enumerations
+      tags:
+      - configs
+  /tenants:
+    get:
+      description: Active tenants by name; include_archived=1 adds archived ones.
+        Requires permission `tenants.read`.
+      parameters:
+      - description: Also list archived tenants
+        in: query
+        name: include_archived
+        type: boolean
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/api.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.TenantList'
+                  type: array
+              type: object
+      summary: List tenants
+      tags:
+      - tenants
+    post:
+      consumes:
+      - application/json
+      description: |-
+        Validates the config and stores it as version 1. No code change is needed to onboard an insurer.
+        Requires permission `tenants.manage`. Errors: BAD_REQUEST, CONFIG_REQUIRED, CONFIG_INVALID (data[0].issues), TENANT_SLUG_INVALID, TENANT_SLUG_TAKEN.
+      parameters:
+      - description: Slug, full config and a note
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateTenantRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/api.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.TenantDetail'
+                  type: array
+              type: object
+      summary: Create (onboard) a tenant
+      tags:
+      - tenants
+  /tenants/{id}:
+    delete:
+      description: |-
+        Soft delete: the tenant disappears from lists and stops accepting claims, its history stays readable.
+        Requires permission `tenants.manage`. Errors: TENANT_NOT_FOUND, TENANT_ARCHIVED.
+      parameters:
+      - description: Tenant id or slug
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.Response'
+      summary: Archive a tenant
+      tags:
+      - tenants
+    get:
+      description: 'id may be the tenant id or its slug. Requires permission `tenants.read`.
+        Errors: TENANT_NOT_FOUND.'
+      parameters:
+      - description: Tenant id or slug
+        example: safeguard
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/api.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.TenantDetail'
+                  type: array
+              type: object
+      summary: Get a tenant with its current config
+      tags:
+      - tenants
+    put:
+      consumes:
+      - application/json
+      description: |-
+        base_version must be the version the edit started from; otherwise VERSION_CONFLICT (someone saved in between).
+        Requires permission `tenants.manage`. Errors: BAD_REQUEST, CONFIG_REQUIRED, CONFIG_INVALID, VERSION_REQUIRED, VERSION_CONFLICT, TENANT_NOT_FOUND, TENANT_ARCHIVED.
+      parameters:
+      - description: Tenant id or slug
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Full config, note and base version
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateTenantRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/api.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.TenantDetail'
+                  type: array
+              type: object
+      summary: Save a new config version
+      tags:
+      - tenants
+  /tenants/{id}/rollback:
+    post:
+      consumes:
+      - application/json
+      description: |-
+        Creates a NEW version whose config equals the chosen one; history is never rewritten.
+        Requires permission `tenants.manage`. Errors: BAD_REQUEST, VERSION_NOT_FOUND, VERSION_CONFLICT, CONFIG_INVALID, TENANT_NOT_FOUND, TENANT_ARCHIVED.
+      parameters:
+      - description: Tenant id or slug
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Version to restore
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.RollbackRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/api.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.TenantDetail'
+                  type: array
+              type: object
+      summary: Roll back to a previous version
+      tags:
+      - tenants
+  /tenants/{id}/versions:
+    get:
+      description: 'Every version, newest first, without configs. Requires permission
+        `tenants.read`. Errors: TENANT_NOT_FOUND.'
+      parameters:
+      - description: Tenant id or slug
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/api.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.VersionList'
+                  type: array
+              type: object
+      summary: Config history
+      tags:
+      - tenants
+  /tenants/{id}/versions/{version}:
+    get:
+      description: 'Requires permission `tenants.read`. Errors: BAD_REQUEST, TENANT_NOT_FOUND,
+        VERSION_NOT_FOUND.'
+      parameters:
+      - description: Tenant id or slug
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Version number
+        in: path
+        name: version
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/api.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.TenantVersion'
+                  type: array
+              type: object
+      summary: One config version
+      tags:
+      - tenants
+  /tenants/diff:
+    get:
+      description: |-
+        a and b are "<id or slug>" (current version) or "<id or slug>@<version>", so it compares two tenants or two versions of one tenant.
+        Lists of scalars are compared as sets; tiers are matched by role and custom fields by key.
+        Requires permission `tenants.read`. Errors: BAD_REQUEST, TENANT_NOT_FOUND, VERSION_NOT_FOUND.
+      parameters:
+      - description: Left side
+        example: safeguard
+        in: query
+        name: a
+        required: true
+        type: string
+      - description: Right side
+        example: govhealth
+        in: query
+        name: b
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/api.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.DiffResult'
+                  type: array
+              type: object
+      summary: Compare two configs
+      tags:
+      - tenants
+swagger: "2.0"
+tags:
+- description: Liveness
+  name: health
+- description: Password login and sessions
+  name: auth
+- description: Tenant CRUD, config history, rollback and diff
+  name: tenants
+- description: Config enumerations, defaults and validation
+  name: configs
+- description: processClaim, preview and processed claims
+  name: claims

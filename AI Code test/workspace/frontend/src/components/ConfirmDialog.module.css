@@ -1,0 +1,4 @@
+.backdrop { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.45); display: grid; place-items: center; padding: var(--gutter); z-index: 50; }
+.dialog { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; width: min(440px, 100%); }
+.message { margin: 0 0 16px; color: var(--text-muted); }
+.actions { display: flex; justify-content: flex-end; gap: 8px; flex-wrap: wrap; }

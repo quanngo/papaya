@@ -1,0 +1,344 @@
+{
+  "common": {
+    "loading": "Loading…",
+    "saving": "Saving…",
+    "cancel": "Cancel",
+    "back": "Back",
+    "edit": "Edit",
+    "view": "View",
+    "details": "Details",
+    "hide": "Hide",
+    "actions": "Actions",
+    "removeItem": "Remove {{item}}"
+  },
+  "layout": {
+    "appName": "Claim Config",
+    "mainMenu": "Main menu",
+    "language": "Language",
+    "logout": "Sign out",
+    "logoutTitle": "Sign out?",
+    "logoutMessage": "You will need to sign in again to continue.",
+    "menu": {
+      "tenants": "Insurers",
+      "preview": "Claim preview",
+      "diff": "Compare configs",
+      "claims": "Processed claims",
+      "dashboard": "Overview"
+    },
+    "groups": {
+      "config": "Configuration",
+      "operations": "Operations"
+    }
+  },
+  "login": {
+    "title": "Sign in",
+    "subtitle": "Insurer configuration admin",
+    "email": "Email",
+    "password": "Password",
+    "remember": "Keep me signed in",
+    "submit": "Sign in",
+    "signingIn": "Signing in…",
+    "demoHint": "Demo accounts: admin@papaya.com / 123456 · operator@papaya.com / Operator@2026 · viewer@papaya.com / Viewer@2026!"
+  },
+  "tenants": {
+    "title": "Insurers",
+    "subtitle": "Each insurer has its own configuration; onboarding a new one needs no code change.",
+    "new": "Add insurer",
+    "showArchived": "Show archived insurers",
+    "empty": "No insurers yet.",
+    "name": "Name",
+    "slug": "Identifier",
+    "version": "Version",
+    "updated": "Updated",
+    "history": "History",
+    "archived": "Archived",
+    "archivedNotice": "{{name}} was archived.",
+    "search": "Search insurers",
+    "searchPlaceholder": "Search by name or identifier…",
+    "sortBy": "Sort by",
+    "sort": {
+      "name": "Name A–Z",
+      "updated": "Recently updated",
+      "version": "Most versions"
+    },
+    "count": "{{shown}} / {{total}} insurers",
+    "noMatch": "No insurer matches \"{{q}}\".",
+    "claimTypes": "Claim types",
+    "threshold": "Auto-approval",
+    "tiers": "Tiers",
+    "channels": "Channels",
+    "previewFor": "Preview claims for {{name}}",
+    "compareFor": "Compare {{name}}"
+  },
+  "tenant": {
+    "newTitle": "Add an insurer",
+    "versionN": "v{{n}}",
+    "slug": "Identifier (slug)",
+    "slugHint": "Lowercase letters, digits and hyphens, e.g. carelink. Cannot change after creation.",
+    "compare": "Compare",
+    "archive": "Archive",
+    "archiveTitle": "Archive this insurer?",
+    "archiveMessage": "{{name}} will stop accepting new claims. Its configuration history is kept.",
+    "readOnly": "You can only view this configuration.",
+    "created": "Insurer created (version 1).",
+    "saved": "Saved version {{n}}.",
+    "reload": "Reload the latest configuration",
+    "note": "Version note",
+    "notePlaceholder": "Note for this version (optional)",
+    "create": "Create insurer",
+    "saveVersion": "Save new version",
+    "validating": "Checking the configuration…",
+    "valid": "The configuration is valid.",
+    "fixIssues": "{{n}} problem(s) to fix before saving.",
+    "allIssues": "Show all problems",
+    "issueCount": "{{n}} problem(s)",
+    "previewTitle": "Preview with this configuration",
+    "previewHint": "Uses the configuration being edited (unsaved) to show how a sample claim would be processed.",
+    "runPreview": "Preview",
+    "previewNeedsValid": "Fix the configuration problems to preview.",
+    "unsaved": "Unsaved",
+    "sectionNav": "Jump to section",
+    "saveShortcut": "Ctrl+S / ⌘S to save"
+  },
+  "sections": {
+    "branding": "Branding",
+    "claim_types": "Claim types & documents",
+    "approval": "Approval rules",
+    "notifications": "Notifications",
+    "sla": "SLA",
+    "custom_fields": "Custom fields"
+  },
+  "branding": {
+    "company_name": "Company name",
+    "logo_url": "Logo URL",
+    "primary_color": "Primary color",
+    "secondary_color": "Secondary color",
+    "preview": "Branding preview",
+    "logoAlt": "{{name}} logo",
+    "logoStatus": {
+      "empty": "No logo yet: showing initials.",
+      "loading": "Loading logo…",
+      "ok": "Logo preview.",
+      "error": "Could not load an image from this URL: showing initials."
+    }
+  },
+  "claimTypesSection": {
+    "enabled": "Supported claim types",
+    "documentsFor": "Documents for {{type}}",
+    "required": "Required",
+    "optional": "Optional",
+    "documentPlaceholder": "Type a document name and press Enter"
+  },
+  "approval": {
+    "threshold": "Auto-approval threshold",
+    "thresholdHint": "Claims below this amount are approved automatically. Set 0 to review every claim manually.",
+    "from": "From (≥)",
+    "to": "To (<)",
+    "role": "Approver role",
+    "fromN": "Tier {{n}}: from",
+    "toN": "Tier {{n}}: to",
+    "roleN": "Tier {{n}}: role",
+    "addTier": "Add approval tier",
+    "removeTier": "Remove tier {{n}}"
+  },
+  "notifications": {
+    "event": "Event",
+    "enabled": "On",
+    "template": "Template",
+    "defaultTemplate": "Default template",
+    "enableEvent": "Enable {{event}} notifications",
+    "channelFor": "{{channel}} for {{event}}",
+    "templateFor": "Template for {{event}}",
+    "webhookUrl": "Webhook URL",
+    "webhookHint": "Required when an event uses the webhook channel."
+  },
+  "sla": {
+    "timezone": "Time zone",
+    "defaultDays": "Default days",
+    "defaultDaysHint": "Used for claim types without their own SLA.",
+    "targets": "Target processing time (business days)",
+    "noClaimTypes": "Enable at least one claim type.",
+    "escalation": "Escalation on SLA breach",
+    "afterBreachDays": "After (days)",
+    "notify": "Notify",
+    "addRule": "Add rule",
+    "removeRule": "Remove rule {{n}}"
+  },
+  "customFields": {
+    "none": "No custom fields.",
+    "key": "Key",
+    "label": "Label",
+    "type": "Type",
+    "pattern": "Format (regex)",
+    "options": "Options",
+    "optionsPlaceholder": "Type an option and press Enter",
+    "required": "Required",
+    "remove": "Remove field",
+    "add": "Add field"
+  },
+  "fieldTypes": {
+    "text": "Text",
+    "number": "Number",
+    "select": "Select"
+  },
+  "claimTypes": {
+    "OUTPATIENT": "Outpatient",
+    "INPATIENT": "Inpatient",
+    "DENTAL": "Dental",
+    "MATERNITY": "Maternity",
+    "OPTICAL": "Optical"
+  },
+  "events": {
+    "claim_submitted": "Claim submitted",
+    "approved": "Approved",
+    "rejected": "Rejected",
+    "payment_sent": "Payment sent"
+  },
+  "channels": {
+    "email": "Email",
+    "sms": "SMS",
+    "webhook": "Webhook"
+  },
+  "routing": {
+    "auto_approved": "Auto-approved",
+    "manual_review": "Manual review",
+    "rejected": "Not accepted"
+  },
+  "claim": {
+    "claimType": "Claim type",
+    "amount": "Amount",
+    "submittedAt": "Submitted at",
+    "submittedAtHint": "Empty = now.",
+    "documents": "Submitted documents",
+    "documentsPlaceholder": "invoice, prescription…"
+  },
+  "result": {
+    "approval": "Approval",
+    "autoApproved": "Automatic (below {{threshold}})",
+    "tierRange": "tier [{{min}}, {{max}})",
+    "notifications": "Notifications",
+    "documents": "Required documents",
+    "optional": "Optional",
+    "missing": "Missing",
+    "sla": "SLA deadline",
+    "slaDays": "{{days}} business days",
+    "customFields": "Custom fields",
+    "none": "None",
+    "trace": "Step-by-step explanation"
+  },
+  "preview": {
+    "title": "Claim processing preview",
+    "subtitle": "Send the same claim to several insurers to see how each one handles it.",
+    "tenants": "Insurers",
+    "run": "Preview ({{n}} insurers)",
+    "process": "Process for real ({{n}} insurers)",
+    "processHint": "Preview stores nothing. Processing runs processClaim and stores the claims.",
+    "resultsTitle": "Predicted outcome",
+    "processedTitle": "Processing result (stored)",
+    "unsavedConfig": "Unsaved configuration",
+    "stored": "stored"
+  },
+  "diff": {
+    "title": "Compare configurations",
+    "subtitle": "Compare two insurers, or two versions of the same insurer.",
+    "chooseTenant": "Choose an insurer…",
+    "currentVersion": "Current version",
+    "tenantOf": "Insurer on side {{side}}",
+    "versionOf": "Version on side {{side}}",
+    "swap": "Swap sides",
+    "pickBoth": "Pick both sides to compare.",
+    "count": "{{n}} difference(s)",
+    "showAll": "Show full configurations side by side",
+    "identical": "The two configurations are identical.",
+    "field": "Field",
+    "kind": {
+      "added": "added",
+      "removed": "removed",
+      "changed": "changed"
+    }
+  },
+  "history": {
+    "title": "Configuration history: {{name}}",
+    "subtitle": "Every save creates a new version. A rollback also creates a new version; history is never deleted.",
+    "versions": "Versions",
+    "current": "current",
+    "currentN": "Current (v{{n}})",
+    "noNote": "no note",
+    "system": "system",
+    "onlyOne": "There is only one version.",
+    "diffTitle": "Changes from v{{v}} → current (v{{current}})",
+    "rollbackTo": "Restore v{{v}}",
+    "rollbackTitle": "Restore this version?",
+    "rollbackMessage": "The configuration of v{{v}} will be saved as a new version v{{n}}. History stays intact.",
+    "rolledBack": "Restored v{{from}} as new version v{{n}}.",
+    "source": {
+      "create": "created",
+      "update": "updated",
+      "rollback": "restored v{{n}}"
+    }
+  },
+  "claims": {
+    "title": "Processed claims",
+    "subtitle": "Claims run through processClaim, with the configuration version used.",
+    "filterTenant": "Filter by insurer",
+    "allTenants": "All insurers",
+    "empty": "No claims processed yet.",
+    "when": "When",
+    "tenant": "Insurer",
+    "routing": "Outcome",
+    "filterRouting": "Filter by outcome",
+    "allRoutings": "All"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "back": "Back to insurers"
+  },
+  "errors": {
+    "common": {
+      "UNKNOWN": "Something went wrong. Please try again.",
+      "NETWORK_ERROR": "Cannot reach the server.",
+      "BAD_REQUEST": "The request is invalid.",
+      "UNAUTHENTICATED": "Your session has ended. Please sign in again.",
+      "FORBIDDEN": "You don't have access to this feature.",
+      "CROSS_ORIGIN": "The request was blocked because it did not come from the same origin.",
+      "NOT_FOUND": "Not found.",
+      "INTERNAL_ERROR": "The server hit an error. Please try again.",
+      "CONFIG_REQUIRED": "The configuration is missing.",
+      "CONFIG_INVALID": "The configuration is not valid. Please fix the highlighted problems.",
+      "TENANT_NOT_FOUND": "Insurer not found.",
+      "TENANT_ARCHIVED": "This insurer has been archived.",
+      "TENANT_REQUIRED": "Choose at least one insurer.",
+      "VERSION_NOT_FOUND": "Version not found.",
+      "CLAIM_TYPE_REQUIRED": "Choose a claim type.",
+      "CLAIM_TYPE_UNKNOWN": "This claim type does not exist.",
+      "CLAIM_AMOUNT_INVALID": "The amount must be zero or more."
+    },
+    "login": {
+      "INVALID_CREDENTIALS": "Wrong email or password.",
+      "ACCOUNT_LOCKED": "This account is temporarily locked after too many failed sign-ins. Try again later."
+    },
+    "tenant": {
+      "TENANT_SLUG_INVALID": "The identifier may only use lowercase letters, digits and hyphens (2–64 characters).",
+      "TENANT_SLUG_TAKEN": "This identifier is already used.",
+      "VERSION_REQUIRED": "The edit's base version is missing. Reload the page.",
+      "VERSION_CONFLICT": "Someone else just saved this configuration. Your changes were not saved."
+    }
+  },
+  "dashboard": {
+    "title": "Overview",
+    "subtitle": "Configuration and claim processing at a glance.",
+    "stats": "Key numbers",
+    "processClaim": "Process a claim",
+    "previewClaim": "Preview a claim",
+    "recentChanges": "Recent configuration changes",
+    "recentClaims": "Recently processed claims",
+    "viewAll": "View all",
+    "stat": {
+      "tenants": "Active insurers",
+      "versions": "Configuration versions",
+      "claims": "Processed claims",
+      "manual": "Need manual review",
+      "autoRate": "Auto-approval rate"
+    }
+  }
+}

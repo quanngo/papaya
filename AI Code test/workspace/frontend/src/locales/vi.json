@@ -1,0 +1,344 @@
+{
+  "common": {
+    "loading": "Đang tải…",
+    "saving": "Đang lưu…",
+    "cancel": "Hủy",
+    "back": "Quay lại",
+    "edit": "Sửa",
+    "view": "Xem",
+    "details": "Chi tiết",
+    "hide": "Ẩn",
+    "actions": "Thao tác",
+    "removeItem": "Xóa {{item}}"
+  },
+  "layout": {
+    "appName": "Claim Config",
+    "mainMenu": "Menu chính",
+    "language": "Ngôn ngữ",
+    "logout": "Đăng xuất",
+    "logoutTitle": "Đăng xuất?",
+    "logoutMessage": "Bạn sẽ cần đăng nhập lại để tiếp tục.",
+    "menu": {
+      "tenants": "Công ty bảo hiểm",
+      "preview": "Xem trước xử lý",
+      "diff": "So sánh cấu hình",
+      "claims": "Yêu cầu đã xử lý",
+      "dashboard": "Tổng quan"
+    },
+    "groups": {
+      "config": "Cấu hình",
+      "operations": "Vận hành"
+    }
+  },
+  "login": {
+    "title": "Đăng nhập",
+    "subtitle": "Quản trị cấu hình công ty bảo hiểm",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "remember": "Ghi nhớ đăng nhập",
+    "submit": "Đăng nhập",
+    "signingIn": "Đang đăng nhập…",
+    "demoHint": "Tài khoản demo: admin@papaya.com / 123456 · operator@papaya.com / Operator@2026 · viewer@papaya.com / Viewer@2026!"
+  },
+  "tenants": {
+    "title": "Công ty bảo hiểm",
+    "subtitle": "Mỗi công ty có cấu hình riêng; thêm công ty mới không cần sửa code.",
+    "new": "Thêm công ty",
+    "showArchived": "Hiện công ty đã lưu trữ",
+    "empty": "Chưa có công ty nào.",
+    "name": "Tên",
+    "slug": "Mã định danh",
+    "version": "Phiên bản",
+    "updated": "Cập nhật",
+    "history": "Lịch sử",
+    "archived": "Đã lưu trữ",
+    "archivedNotice": "Đã lưu trữ {{name}}.",
+    "search": "Tìm công ty",
+    "searchPlaceholder": "Tìm theo tên hoặc mã định danh…",
+    "sortBy": "Sắp xếp",
+    "sort": {
+      "name": "Tên A–Z",
+      "updated": "Mới cập nhật",
+      "version": "Nhiều phiên bản nhất"
+    },
+    "count": "{{shown}} / {{total}} công ty",
+    "noMatch": "Không có công ty nào khớp \"{{q}}\".",
+    "claimTypes": "Loại yêu cầu",
+    "threshold": "Ngưỡng tự duyệt",
+    "tiers": "Cấp duyệt",
+    "channels": "Kênh thông báo",
+    "previewFor": "Xem trước xử lý cho {{name}}",
+    "compareFor": "So sánh cấu hình {{name}}"
+  },
+  "tenant": {
+    "newTitle": "Thêm công ty bảo hiểm",
+    "versionN": "v{{n}}",
+    "slug": "Mã định danh (slug)",
+    "slugHint": "Chữ thường, số và dấu gạch ngang, ví dụ carelink. Không đổi được sau khi tạo.",
+    "compare": "So sánh",
+    "archive": "Lưu trữ",
+    "archiveTitle": "Lưu trữ công ty này?",
+    "archiveMessage": "{{name}} sẽ không nhận yêu cầu bồi thường mới. Lịch sử cấu hình vẫn được giữ.",
+    "readOnly": "Bạn chỉ có quyền xem cấu hình này.",
+    "created": "Đã tạo công ty (phiên bản 1).",
+    "saved": "Đã lưu phiên bản {{n}}.",
+    "reload": "Tải lại cấu hình mới nhất",
+    "note": "Ghi chú cho phiên bản",
+    "notePlaceholder": "Ghi chú cho phiên bản này (không bắt buộc)",
+    "create": "Tạo công ty",
+    "saveVersion": "Lưu phiên bản mới",
+    "validating": "Đang kiểm tra cấu hình…",
+    "valid": "Cấu hình hợp lệ.",
+    "fixIssues": "Còn {{n}} lỗi cần sửa trước khi lưu.",
+    "allIssues": "Xem tất cả lỗi",
+    "issueCount": "{{n}} lỗi",
+    "previewTitle": "Xem trước với cấu hình này",
+    "previewHint": "Dùng cấu hình đang sửa (chưa lưu) để xem một yêu cầu mẫu sẽ được xử lý thế nào.",
+    "runPreview": "Xem trước",
+    "previewNeedsValid": "Sửa các lỗi cấu hình để xem trước.",
+    "unsaved": "Chưa lưu",
+    "sectionNav": "Đi tới phần cấu hình",
+    "saveShortcut": "Ctrl+S / ⌘S để lưu"
+  },
+  "sections": {
+    "branding": "Thương hiệu",
+    "claim_types": "Loại yêu cầu & chứng từ",
+    "approval": "Quy tắc duyệt",
+    "notifications": "Thông báo",
+    "sla": "SLA",
+    "custom_fields": "Trường bổ sung"
+  },
+  "branding": {
+    "company_name": "Tên công ty",
+    "logo_url": "URL logo",
+    "primary_color": "Màu chính",
+    "secondary_color": "Màu phụ",
+    "preview": "Xem trước thương hiệu",
+    "logoAlt": "Logo {{name}}",
+    "logoStatus": {
+      "empty": "Chưa có logo: đang hiển thị chữ viết tắt.",
+      "loading": "Đang tải logo…",
+      "ok": "Xem trước logo.",
+      "error": "Không tải được ảnh từ URL này: đang hiển thị chữ viết tắt."
+    }
+  },
+  "claimTypesSection": {
+    "enabled": "Loại yêu cầu được hỗ trợ",
+    "documentsFor": "Chứng từ cho {{type}}",
+    "required": "Bắt buộc",
+    "optional": "Tùy chọn",
+    "documentPlaceholder": "Nhập tên chứng từ rồi Enter"
+  },
+  "approval": {
+    "threshold": "Ngưỡng tự động duyệt",
+    "thresholdHint": "Yêu cầu dưới ngưỡng này được duyệt tự động. Đặt 0 để mọi yêu cầu đều phải duyệt tay.",
+    "from": "Từ (≥)",
+    "to": "Đến (<)",
+    "role": "Vai trò duyệt",
+    "fromN": "Cấp {{n}}: từ",
+    "toN": "Cấp {{n}}: đến",
+    "roleN": "Cấp {{n}}: vai trò",
+    "addTier": "Thêm cấp duyệt",
+    "removeTier": "Xóa cấp {{n}}"
+  },
+  "notifications": {
+    "event": "Sự kiện",
+    "enabled": "Bật",
+    "template": "Mẫu nội dung",
+    "defaultTemplate": "Mẫu mặc định",
+    "enableEvent": "Bật thông báo {{event}}",
+    "channelFor": "{{channel}} cho {{event}}",
+    "templateFor": "Mẫu nội dung cho {{event}}",
+    "webhookUrl": "Webhook URL",
+    "webhookHint": "Bắt buộc khi có sự kiện dùng kênh webhook."
+  },
+  "sla": {
+    "timezone": "Múi giờ",
+    "defaultDays": "Số ngày mặc định",
+    "defaultDaysHint": "Áp dụng cho loại yêu cầu chưa đặt SLA riêng.",
+    "targets": "Thời gian xử lý mục tiêu (ngày làm việc)",
+    "noClaimTypes": "Hãy bật ít nhất một loại yêu cầu.",
+    "escalation": "Leo thang khi vi phạm SLA",
+    "afterBreachDays": "Sau (ngày)",
+    "notify": "Thông báo cho",
+    "addRule": "Thêm quy tắc",
+    "removeRule": "Xóa quy tắc {{n}}"
+  },
+  "customFields": {
+    "none": "Không có trường bổ sung.",
+    "key": "Khóa",
+    "label": "Nhãn",
+    "type": "Kiểu",
+    "pattern": "Định dạng (regex)",
+    "options": "Các lựa chọn",
+    "optionsPlaceholder": "Nhập lựa chọn rồi Enter",
+    "required": "Bắt buộc",
+    "remove": "Xóa trường",
+    "add": "Thêm trường"
+  },
+  "fieldTypes": {
+    "text": "Văn bản",
+    "number": "Số",
+    "select": "Lựa chọn"
+  },
+  "claimTypes": {
+    "OUTPATIENT": "Ngoại trú",
+    "INPATIENT": "Nội trú",
+    "DENTAL": "Nha khoa",
+    "MATERNITY": "Thai sản",
+    "OPTICAL": "Nhãn khoa"
+  },
+  "events": {
+    "claim_submitted": "Đã nộp yêu cầu",
+    "approved": "Đã duyệt",
+    "rejected": "Bị từ chối",
+    "payment_sent": "Đã thanh toán"
+  },
+  "channels": {
+    "email": "Email",
+    "sms": "SMS",
+    "webhook": "Webhook"
+  },
+  "routing": {
+    "auto_approved": "Tự động duyệt",
+    "manual_review": "Duyệt tay",
+    "rejected": "Không chấp nhận"
+  },
+  "claim": {
+    "claimType": "Loại yêu cầu",
+    "amount": "Số tiền",
+    "submittedAt": "Thời điểm nộp",
+    "submittedAtHint": "Để trống = bây giờ.",
+    "documents": "Chứng từ đã nộp",
+    "documentsPlaceholder": "invoice, prescription…"
+  },
+  "result": {
+    "approval": "Duyệt",
+    "autoApproved": "Tự động (dưới ngưỡng {{threshold}})",
+    "tierRange": "cấp [{{min}}, {{max}})",
+    "notifications": "Thông báo",
+    "documents": "Chứng từ bắt buộc",
+    "optional": "Tùy chọn",
+    "missing": "Còn thiếu",
+    "sla": "Hạn SLA",
+    "slaDays": "{{days}} ngày làm việc",
+    "customFields": "Trường bổ sung",
+    "none": "Không có",
+    "trace": "Giải thích từng bước"
+  },
+  "preview": {
+    "title": "Xem trước xử lý yêu cầu",
+    "subtitle": "Gửi cùng một yêu cầu cho nhiều công ty để thấy mỗi công ty xử lý khác nhau.",
+    "tenants": "Công ty",
+    "run": "Xem trước ({{n}} công ty)",
+    "process": "Gửi xử lý thật ({{n}} công ty)",
+    "processHint": "Xem trước không lưu gì. Gửi xử lý thật sẽ chạy processClaim và lưu yêu cầu.",
+    "resultsTitle": "Kết quả dự đoán",
+    "processedTitle": "Kết quả xử lý (đã lưu)",
+    "unsavedConfig": "Cấu hình chưa lưu",
+    "stored": "đã lưu"
+  },
+  "diff": {
+    "title": "So sánh cấu hình",
+    "subtitle": "So sánh hai công ty, hoặc hai phiên bản của cùng một công ty.",
+    "chooseTenant": "Chọn công ty…",
+    "currentVersion": "Phiên bản hiện tại",
+    "tenantOf": "Công ty bên {{side}}",
+    "versionOf": "Phiên bản bên {{side}}",
+    "swap": "Đổi hai bên",
+    "pickBoth": "Chọn cả hai bên để so sánh.",
+    "count": "{{n}} điểm khác nhau",
+    "showAll": "Hiện toàn bộ cấu hình song song",
+    "identical": "Hai cấu hình giống nhau.",
+    "field": "Trường",
+    "kind": {
+      "added": "thêm",
+      "removed": "bỏ",
+      "changed": "đổi"
+    }
+  },
+  "history": {
+    "title": "Lịch sử cấu hình: {{name}}",
+    "subtitle": "Mỗi lần lưu tạo một phiên bản mới. Khôi phục cũng tạo phiên bản mới, không xóa lịch sử.",
+    "versions": "Các phiên bản",
+    "current": "hiện tại",
+    "currentN": "Hiện tại (v{{n}})",
+    "noNote": "không có ghi chú",
+    "system": "hệ thống",
+    "onlyOne": "Chỉ có một phiên bản.",
+    "diffTitle": "Khác biệt v{{v}} → hiện tại (v{{current}})",
+    "rollbackTo": "Khôi phục v{{v}}",
+    "rollbackTitle": "Khôi phục phiên bản?",
+    "rollbackMessage": "Cấu hình của v{{v}} sẽ được lưu thành phiên bản mới v{{n}}. Lịch sử vẫn giữ nguyên.",
+    "rolledBack": "Đã khôi phục v{{from}} thành phiên bản mới v{{n}}.",
+    "source": {
+      "create": "tạo mới",
+      "update": "cập nhật",
+      "rollback": "khôi phục v{{n}}"
+    }
+  },
+  "claims": {
+    "title": "Yêu cầu đã xử lý",
+    "subtitle": "Các yêu cầu đã chạy qua processClaim, kèm phiên bản cấu hình đã dùng.",
+    "filterTenant": "Lọc theo công ty",
+    "allTenants": "Tất cả công ty",
+    "empty": "Chưa có yêu cầu nào được xử lý.",
+    "when": "Thời điểm",
+    "tenant": "Công ty",
+    "routing": "Kết quả",
+    "filterRouting": "Lọc theo kết quả",
+    "allRoutings": "Tất cả"
+  },
+  "notFound": {
+    "title": "Không tìm thấy trang",
+    "back": "Về danh sách công ty"
+  },
+  "errors": {
+    "common": {
+      "UNKNOWN": "Đã có lỗi xảy ra. Vui lòng thử lại.",
+      "NETWORK_ERROR": "Không kết nối được máy chủ.",
+      "BAD_REQUEST": "Yêu cầu không hợp lệ.",
+      "UNAUTHENTICATED": "Phiên đăng nhập đã hết. Vui lòng đăng nhập lại.",
+      "FORBIDDEN": "Bạn không có quyền truy cập chức năng này.",
+      "CROSS_ORIGIN": "Yêu cầu bị chặn vì không đến từ cùng nguồn.",
+      "NOT_FOUND": "Không tìm thấy.",
+      "INTERNAL_ERROR": "Máy chủ gặp lỗi. Vui lòng thử lại.",
+      "CONFIG_REQUIRED": "Thiếu cấu hình.",
+      "CONFIG_INVALID": "Cấu hình chưa hợp lệ. Vui lòng sửa các lỗi được đánh dấu.",
+      "TENANT_NOT_FOUND": "Không tìm thấy công ty bảo hiểm.",
+      "TENANT_ARCHIVED": "Công ty này đã được lưu trữ.",
+      "TENANT_REQUIRED": "Hãy chọn ít nhất một công ty.",
+      "VERSION_NOT_FOUND": "Không tìm thấy phiên bản.",
+      "CLAIM_TYPE_REQUIRED": "Hãy chọn loại yêu cầu.",
+      "CLAIM_TYPE_UNKNOWN": "Loại yêu cầu không tồn tại.",
+      "CLAIM_AMOUNT_INVALID": "Số tiền phải lớn hơn hoặc bằng 0."
+    },
+    "login": {
+      "INVALID_CREDENTIALS": "Email hoặc mật khẩu không đúng.",
+      "ACCOUNT_LOCKED": "Tài khoản tạm thời bị khóa do đăng nhập sai nhiều lần. Vui lòng thử lại sau."
+    },
+    "tenant": {
+      "TENANT_SLUG_INVALID": "Mã định danh chỉ gồm chữ thường, số và dấu gạch ngang (2–64 ký tự).",
+      "TENANT_SLUG_TAKEN": "Mã định danh này đã được dùng.",
+      "VERSION_REQUIRED": "Thiếu phiên bản gốc của lần sửa. Hãy tải lại trang.",
+      "VERSION_CONFLICT": "Người khác vừa lưu cấu hình này. Thay đổi của bạn chưa được lưu."
+    }
+  },
+  "dashboard": {
+    "title": "Tổng quan",
+    "subtitle": "Tình hình cấu hình và xử lý yêu cầu bồi thường.",
+    "stats": "Số liệu chính",
+    "processClaim": "Xử lý yêu cầu",
+    "previewClaim": "Xem trước yêu cầu",
+    "recentChanges": "Cấu hình thay đổi gần đây",
+    "recentClaims": "Yêu cầu xử lý gần đây",
+    "viewAll": "Xem tất cả",
+    "stat": {
+      "tenants": "Công ty đang hoạt động",
+      "versions": "Phiên bản cấu hình",
+      "claims": "Yêu cầu đã xử lý",
+      "manual": "Cần duyệt tay",
+      "autoRate": "Tỷ lệ tự động duyệt"
+    }
+  }
+}

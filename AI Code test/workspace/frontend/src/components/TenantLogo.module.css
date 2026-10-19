@@ -1,0 +1,17 @@
+.logo { position: relative; display: inline-flex; align-items: center; justify-content: center; flex: none; overflow: hidden; }
+.img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
+.pending { position: absolute; opacity: 0; pointer-events: none; }
+.initials {
+  display: inline-grid; place-items: center; height: 100%; aspect-ratio: 1;
+  border-radius: 6px; background: var(--text-muted); color: #fff; font-weight: 700; letter-spacing: 0.02em;
+}
+
+.sm { width: 76px; height: 26px; justify-content: flex-start; }
+.sm .initials { font-size: 11px; }
+.md { width: 120px; height: 40px; justify-content: flex-start; }
+.md .initials { font-size: 14px; }
+.lg {
+  width: 100%; max-width: 260px; height: 72px; padding: 8px;
+  border: 1px dashed var(--border); border-radius: var(--radius-sm); background: var(--surface-2);
+}
+.lg .initials { font-size: 20px; border-radius: 8px; }

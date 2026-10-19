@@ -1,0 +1,25 @@
+.fieldset { border: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.check { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px 4px 0; cursor: pointer; }
+.subcard { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px; display: grid; gap: 10px; background: var(--surface-2); }
+.subTitle { margin: 0; font-size: 13.5px; }
+.narrow { max-width: 220px; }
+.numCell { min-width: 110px; }
+.readonly { background: var(--surface-2); color: var(--text-muted); }
+.templateCell { min-width: 220px; }
+.colorText { flex: 1; min-width: 0; font-family: var(--mono); }
+.escalationRow { display: grid; grid-template-columns: 140px 1fr auto; gap: 8px; align-items: end; }
+.fullRow { grid-column: 1 / -1; }
+.fieldGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; }
+.fieldFooter { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+.logoPreview { display: grid; gap: 4px; margin-top: 4px; }
+.brandPreview { border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; max-width: 420px; }
+.brandBar { height: 56px; display: flex; align-items: center; padding: 0 14px; }
+.brandAccent { height: 6px; }
+.logo { max-height: 36px; max-width: 70%; }
+.logoText { color: #fff; font-weight: 650; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35); }
+
+@media (max-width: 640px) {
+  .escalationRow { grid-template-columns: 1fr auto; }
+  .escalationRow > :first-child { grid-column: 1 / -1; }
+}

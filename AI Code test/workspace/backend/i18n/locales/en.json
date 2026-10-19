@@ -1,0 +1,100 @@
+{
+  "error": {
+    "BAD_REQUEST": "The request is invalid.",
+    "CONFIG_REQUIRED": "The configuration is missing.",
+    "CONFIG_INVALID": "The configuration is not valid. Please fix the highlighted problems.",
+    "TENANT_SLUG_INVALID": "The identifier may only contain lowercase letters, digits and hyphens (2–64 characters), and cannot start or end with a hyphen.",
+    "TENANT_SLUG_TAKEN": "This identifier is already used by another insurer.",
+    "TENANT_NOT_FOUND": "Insurer not found.",
+    "TENANT_ARCHIVED": "This insurer has been archived.",
+    "TENANT_REQUIRED": "Choose an insurer or send a configuration.",
+    "VERSION_REQUIRED": "The edit's base version (base_version) is missing.",
+    "VERSION_NOT_FOUND": "Configuration version not found.",
+    "VERSION_CONFLICT": "Someone else changed this configuration. Reload it and edit again.",
+    "CLAIM_TYPE_REQUIRED": "The claim type is missing.",
+    "CLAIM_TYPE_UNKNOWN": "This claim type does not exist.",
+    "CLAIM_AMOUNT_INVALID": "The claim amount must be zero or more.",
+    "UNAUTHENTICATED": "Please sign in.",
+    "FORBIDDEN": "You don't have permission to do this.",
+    "CROSS_ORIGIN": "The request was blocked because it did not come from the same origin.",
+    "INVALID_CREDENTIALS": "Wrong email or password.",
+    "ACCOUNT_LOCKED": "This account is temporarily locked after too many failed sign-ins. Try again later.",
+    "INVALID_CURRENT_PASSWORD": "The current password is wrong.",
+    "PASSWORD_TOO_SHORT": "The new password is too short.",
+    "PASSWORD_TOO_LONG": "The new password is longer than 72 bytes.",
+    "LOCALE_UNSUPPORTED": "This language is not supported.",
+    "NOT_FOUND": "Not found.",
+    "INTERNAL_ERROR": "Something went wrong. Please try again."
+  },
+  "issue": {
+    "COMPANY_NAME_REQUIRED": "Company name is required.",
+    "URL_INVALID": "The URL must start with http:// or https://.",
+    "COLOR_INVALID": "The color must look like #RRGGBB.",
+    "NO_CLAIM_TYPE": "Enable at least one claim type.",
+    "CLAIM_TYPE_UNKNOWN": "Claim type {{claim_type}} does not exist.",
+    "CLAIM_TYPE_DUPLICATE": "Claim type {{claim_type}} is listed twice.",
+    "DOCUMENTS_MISSING": "No documents are defined for {{claim_type}}.",
+    "DOCUMENT_NAME_EMPTY": "A document name cannot be empty.",
+    "DOCUMENT_BOTH_REQUIRED_OPTIONAL": "Document {{document}} cannot be both required and optional.",
+    "FIELD_KEY_INVALID": "Field key \"{{key}}\" must be lowercase, start with a letter and use only a-z, 0-9 and _.",
+    "FIELD_KEY_DUPLICATE": "Field key \"{{key}}\" is used twice.",
+    "FIELD_LABEL_EMPTY": "The field label cannot be empty.",
+    "FIELD_TYPE_UNKNOWN": "Field type \"{{type}}\" is not valid.",
+    "FIELD_OPTIONS_REQUIRED": "A select field needs at least one option.",
+    "FIELD_PATTERN_INVALID": "The validation pattern (regex) is not valid.",
+    "THRESHOLD_NEGATIVE": "The auto-approval threshold must be zero or more.",
+    "NO_TIER": "Add at least one approval tier.",
+    "TIER_START_MISMATCH": "The first tier must start at the auto-approval threshold ({{expected}}).",
+    "TIER_ROLE_EMPTY": "The approver role cannot be empty.",
+    "TIER_UNBOUNDED_NOT_LAST": "Only the last tier can have no maximum.",
+    "TIER_RANGE_INVALID": "The maximum must be greater than the minimum.",
+    "TIER_LAST_BOUNDED": "The last tier cannot have a maximum, so every amount has an approver.",
+    "TIER_GAP": "This tier must start at {{expected}} (where the previous tier ends); there is a gap.",
+    "TIER_OVERLAP": "This tier must start at {{expected}} (where the previous tier ends); the ranges overlap.",
+    "TIMEZONE_INVALID": "Time zone \"{{timezone}}\" is not valid.",
+    "SLA_NOT_POSITIVE": "SLA days must be greater than zero.",
+    "SLA_MISSING": "No SLA is set for {{claim_type}}.",
+    "ESCALATION_DAYS_INVALID": "Days after the SLA breach must be greater than zero.",
+    "ESCALATION_NOTIFY_EMPTY": "Choose who to notify on escalation.",
+    "EVENT_UNKNOWN": "Event \"{{event}}\" does not exist.",
+    "EVENT_NO_CHANNEL": "An enabled event needs at least one channel.",
+    "CHANNEL_UNKNOWN": "Channel \"{{channel}}\" does not exist.",
+    "WEBHOOK_URL_REQUIRED": "An event uses the webhook channel, so a webhook URL is required.",
+    "CLAIM_TYPE_NOT_ENABLED": "This insurer does not offer {{claim_type}} (enabled: {{enabled}}).",
+    "FIELD_REQUIRED": "\"{{field}}\" is required.",
+    "FIELD_NOT_NUMBER": "\"{{field}}\" must be a number.",
+    "FIELD_NOT_IN_OPTIONS": "The value of \"{{field}}\" is not one of the allowed options.",
+    "FIELD_PATTERN_MISMATCH": "The value of \"{{field}}\" has the wrong format ({{pattern}}).",
+    "NO_MATCHING_TIER": "No approval tier covers the amount {{amount}}."
+  },
+  "trace": {
+    "CLAIM_TYPE_ENABLED": "{{claim_type}} is offered by this insurer.",
+    "DOCUMENTS_REQUIRED": "{{count}} required documents, {{missing}} missing.",
+    "CUSTOM_FIELDS_CHECKED": "Checked {{count}} custom fields.",
+    "AUTO_APPROVED": "Amount {{amount}} is below the threshold {{threshold}}: auto-approved.",
+    "TIER_MATCHED": "Amount {{amount}} falls in tier [{{min}}, {{max}}): routed to {{role}}.",
+    "SLA_DEADLINE": "SLA of {{days}} business days: due {{deadline}}.",
+    "NOTIFICATION_SENT": "Send \"{{event}}\" via {{channels}}.",
+    "NOTIFICATION_DISABLED": "Event \"{{event}}\" is off: no notification.",
+    "CLAIM_REJECTED": "Claim not accepted ({{errors}} problems)."
+  },
+  "role": {
+    "admin": "Administrator",
+    "operator": "Operator",
+    "viewer": "Viewer"
+  },
+  "permission": {
+    "users": {
+      "read": "View users and roles",
+      "manage": "Manage users"
+    },
+    "tenants": {
+      "read": "View insurer configurations",
+      "manage": "Create and edit insurer configurations"
+    },
+    "claims": {
+      "read": "View processed claims",
+      "process": "Submit claims for processing"
+    }
+  }
+}

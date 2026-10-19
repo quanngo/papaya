@@ -1,0 +1,45 @@
+{
+  "slug": "healthfirst",
+  "config": {
+    "branding": {
+      "company_name": "HealthFirst",
+      "logo_url": "https://placehold.co/160x48/00897B/FFFFFF?text=HealthFirst",
+      "primary_color": "#00897B",
+      "secondary_color": "#FF7043"
+    },
+    "claim_types": {
+      "enabled": ["OUTPATIENT", "INPATIENT", "DENTAL", "MATERNITY", "OPTICAL"],
+      "documents": {
+        "OUTPATIENT": { "required": ["invoice", "prescription"], "optional": ["medical_report", "lab_results"] },
+        "INPATIENT": { "required": ["invoice", "discharge_summary"], "optional": ["itemized_bill"] },
+        "DENTAL": { "required": ["invoice"], "optional": ["xray", "dental_treatment_record"] },
+        "MATERNITY": { "required": ["invoice", "birth_certificate", "discharge_summary"], "optional": ["prenatal_records"] },
+        "OPTICAL": { "required": ["invoice", "eye_prescription"], "optional": [] }
+      }
+    },
+    "approval": {
+      "auto_approval_threshold": 5000,
+      "tiers": [
+        { "min_amount": 5000, "max_amount": 50000, "role": "assessor" },
+        { "min_amount": 50000, "max_amount": null, "role": "manager" }
+      ]
+    },
+    "notifications": {
+      "events": {
+        "claim_submitted": { "enabled": true, "channels": ["email", "sms"] },
+        "approved": { "enabled": true, "channels": ["email", "sms"] },
+        "rejected": { "enabled": true, "channels": ["email", "sms"] },
+        "payment_sent": { "enabled": true, "channels": ["sms"] }
+      }
+    },
+    "sla": {
+      "timezone": "Asia/Ho_Chi_Minh",
+      "targets": { "OUTPATIENT": 7, "INPATIENT": 7, "DENTAL": 7, "MATERNITY": 7, "OPTICAL": 7 },
+      "default_days": 7,
+      "escalation": [
+        { "after_breach_days": 2, "notify": ["manager"] }
+      ]
+    },
+    "custom_fields": []
+  }
+}

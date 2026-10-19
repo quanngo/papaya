@@ -1,0 +1,46 @@
+{
+  "slug": "govhealth",
+  "config": {
+    "branding": {
+      "company_name": "GovHealth",
+      "logo_url": "https://placehold.co/160x48/B71C1C/FFFFFF?text=GovHealth",
+      "primary_color": "#B71C1C",
+      "secondary_color": "#37474F"
+    },
+    "claim_types": {
+      "enabled": ["OUTPATIENT", "INPATIENT"],
+      "documents": {
+        "OUTPATIENT": { "required": ["invoice", "prescription", "medical_report", "referral_letter"], "optional": [] },
+        "INPATIENT": { "required": ["invoice", "discharge_summary", "medical_report", "referral_letter"], "optional": ["itemized_bill"] }
+      }
+    },
+    "approval": {
+      "auto_approval_threshold": 0,
+      "tiers": [
+        { "min_amount": 0, "max_amount": null, "role": "committee" }
+      ]
+    },
+    "notifications": {
+      "webhook_url": "https://hooks.govhealth.example/claims",
+      "events": {
+        "claim_submitted": { "enabled": true, "channels": ["email", "webhook"] },
+        "approved": { "enabled": true, "channels": ["email", "webhook"] },
+        "rejected": { "enabled": true, "channels": ["email", "webhook"] },
+        "payment_sent": { "enabled": true, "channels": ["webhook"] }
+      }
+    },
+    "sla": {
+      "timezone": "Asia/Ho_Chi_Minh",
+      "targets": { "OUTPATIENT": 15, "INPATIENT": 15 },
+      "default_days": 15,
+      "escalation": [
+        { "after_breach_days": 1, "notify": ["committee_chair"] },
+        { "after_breach_days": 5, "notify": ["ministry_liaison"] }
+      ]
+    },
+    "custom_fields": [
+      { "key": "department", "label": "Department", "type": "text", "required": true },
+      { "key": "budget_code", "label": "Budget Code", "type": "text", "required": true, "pattern": "^[A-Z]{3}-[0-9]{4}$" }
+    ]
+  }
+}

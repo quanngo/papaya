@@ -1,0 +1,6 @@
+.group { background: var(--surface-2); color: var(--text); font-size: 13px; }
+.path { font-family: var(--mono); font-size: 12.5px; word-break: break-all; }
+.kind { display: block; font-size: 11.5px; color: var(--text-muted); }
+.added td:nth-child(3) { background: var(--added); }
+.removed td:nth-child(2) { background: var(--removed); }
+.changed td:nth-child(2), .changed td:nth-child(3) { background: var(--changed); }

@@ -1,0 +1,100 @@
+{
+  "error": {
+    "BAD_REQUEST": "Yêu cầu không hợp lệ.",
+    "CONFIG_REQUIRED": "Thiếu cấu hình.",
+    "CONFIG_INVALID": "Cấu hình chưa hợp lệ. Vui lòng sửa các lỗi được đánh dấu.",
+    "TENANT_SLUG_INVALID": "Mã định danh chỉ gồm chữ thường, số và dấu gạch ngang (2–64 ký tự), không bắt đầu hoặc kết thúc bằng dấu gạch ngang.",
+    "TENANT_SLUG_TAKEN": "Mã định danh này đã được dùng cho một công ty bảo hiểm khác.",
+    "TENANT_NOT_FOUND": "Không tìm thấy công ty bảo hiểm.",
+    "TENANT_ARCHIVED": "Công ty bảo hiểm này đã được lưu trữ.",
+    "TENANT_REQUIRED": "Cần chọn công ty bảo hiểm hoặc gửi kèm cấu hình.",
+    "VERSION_REQUIRED": "Thiếu phiên bản gốc (base_version) của lần chỉnh sửa.",
+    "VERSION_NOT_FOUND": "Không tìm thấy phiên bản cấu hình.",
+    "VERSION_CONFLICT": "Cấu hình đã được người khác thay đổi. Hãy tải lại rồi chỉnh sửa tiếp.",
+    "CLAIM_TYPE_REQUIRED": "Thiếu loại yêu cầu bồi thường.",
+    "CLAIM_TYPE_UNKNOWN": "Loại yêu cầu bồi thường không tồn tại.",
+    "CLAIM_AMOUNT_INVALID": "Số tiền yêu cầu phải lớn hơn hoặc bằng 0.",
+    "UNAUTHENTICATED": "Vui lòng đăng nhập.",
+    "FORBIDDEN": "Bạn không có quyền thực hiện thao tác này.",
+    "CROSS_ORIGIN": "Yêu cầu bị chặn vì không đến từ cùng nguồn.",
+    "INVALID_CREDENTIALS": "Email hoặc mật khẩu không đúng.",
+    "ACCOUNT_LOCKED": "Tài khoản tạm thời bị khóa do đăng nhập sai nhiều lần. Vui lòng thử lại sau.",
+    "INVALID_CURRENT_PASSWORD": "Mật khẩu hiện tại không đúng.",
+    "PASSWORD_TOO_SHORT": "Mật khẩu mới quá ngắn.",
+    "PASSWORD_TOO_LONG": "Mật khẩu mới dài quá 72 byte.",
+    "LOCALE_UNSUPPORTED": "Ngôn ngữ không được hỗ trợ.",
+    "NOT_FOUND": "Không tìm thấy đường dẫn.",
+    "INTERNAL_ERROR": "Đã có lỗi xảy ra. Vui lòng thử lại."
+  },
+  "issue": {
+    "COMPANY_NAME_REQUIRED": "Tên công ty là bắt buộc.",
+    "URL_INVALID": "URL phải bắt đầu bằng http:// hoặc https://.",
+    "COLOR_INVALID": "Màu phải có dạng #RRGGBB.",
+    "NO_CLAIM_TYPE": "Phải bật ít nhất một loại yêu cầu bồi thường.",
+    "CLAIM_TYPE_UNKNOWN": "Loại yêu cầu bồi thường {{claim_type}} không tồn tại.",
+    "CLAIM_TYPE_DUPLICATE": "Loại {{claim_type}} bị lặp.",
+    "DOCUMENTS_MISSING": "Chưa khai báo chứng từ cho loại {{claim_type}}.",
+    "DOCUMENT_NAME_EMPTY": "Tên chứng từ không được để trống.",
+    "DOCUMENT_BOTH_REQUIRED_OPTIONAL": "Chứng từ {{document}} không thể vừa bắt buộc vừa tùy chọn.",
+    "FIELD_KEY_INVALID": "Khóa trường \"{{key}}\" phải viết thường, bắt đầu bằng chữ cái, chỉ gồm a-z, 0-9 và _.",
+    "FIELD_KEY_DUPLICATE": "Khóa trường \"{{key}}\" bị trùng.",
+    "FIELD_LABEL_EMPTY": "Nhãn trường không được để trống.",
+    "FIELD_TYPE_UNKNOWN": "Kiểu trường \"{{type}}\" không hợp lệ.",
+    "FIELD_OPTIONS_REQUIRED": "Trường lựa chọn phải có ít nhất một giá trị.",
+    "FIELD_PATTERN_INVALID": "Biểu thức kiểm tra (regex) không hợp lệ.",
+    "THRESHOLD_NEGATIVE": "Ngưỡng tự động duyệt phải lớn hơn hoặc bằng 0.",
+    "NO_TIER": "Phải có ít nhất một cấp duyệt.",
+    "TIER_START_MISMATCH": "Cấp duyệt đầu tiên phải bắt đầu từ ngưỡng tự động duyệt ({{expected}}).",
+    "TIER_ROLE_EMPTY": "Vai trò duyệt không được để trống.",
+    "TIER_UNBOUNDED_NOT_LAST": "Chỉ cấp duyệt cuối cùng được để trống mức tối đa.",
+    "TIER_RANGE_INVALID": "Mức tối đa phải lớn hơn mức tối thiểu.",
+    "TIER_LAST_BOUNDED": "Cấp duyệt cuối cùng không được có mức tối đa, để mọi số tiền đều có người duyệt.",
+    "TIER_GAP": "Cấp duyệt phải bắt đầu tại {{expected}} (nơi cấp trước kết thúc), đang bị hở.",
+    "TIER_OVERLAP": "Cấp duyệt phải bắt đầu tại {{expected}} (nơi cấp trước kết thúc), đang bị chồng lấn.",
+    "TIMEZONE_INVALID": "Múi giờ \"{{timezone}}\" không hợp lệ.",
+    "SLA_NOT_POSITIVE": "Số ngày SLA phải lớn hơn 0.",
+    "SLA_MISSING": "Chưa đặt SLA cho loại {{claim_type}}.",
+    "ESCALATION_DAYS_INVALID": "Số ngày sau khi vi phạm SLA phải lớn hơn 0.",
+    "ESCALATION_NOTIFY_EMPTY": "Phải chọn người nhận thông báo leo thang.",
+    "EVENT_UNKNOWN": "Sự kiện \"{{event}}\" không tồn tại.",
+    "EVENT_NO_CHANNEL": "Sự kiện đang bật phải có ít nhất một kênh thông báo.",
+    "CHANNEL_UNKNOWN": "Kênh \"{{channel}}\" không tồn tại.",
+    "WEBHOOK_URL_REQUIRED": "Có sự kiện dùng kênh webhook nên phải nhập webhook URL.",
+    "CLAIM_TYPE_NOT_ENABLED": "Công ty không hỗ trợ loại {{claim_type}} (đang bật: {{enabled}}).",
+    "FIELD_REQUIRED": "Trường \"{{field}}\" là bắt buộc.",
+    "FIELD_NOT_NUMBER": "Trường \"{{field}}\" phải là số.",
+    "FIELD_NOT_IN_OPTIONS": "Giá trị của \"{{field}}\" không nằm trong danh sách cho phép.",
+    "FIELD_PATTERN_MISMATCH": "Giá trị của \"{{field}}\" không đúng định dạng ({{pattern}}).",
+    "NO_MATCHING_TIER": "Không có cấp duyệt nào cho số tiền {{amount}}."
+  },
+  "trace": {
+    "CLAIM_TYPE_ENABLED": "Loại {{claim_type}} được công ty hỗ trợ.",
+    "DOCUMENTS_REQUIRED": "Cần {{count}} chứng từ bắt buộc, còn thiếu {{missing}}.",
+    "CUSTOM_FIELDS_CHECKED": "Đã kiểm tra {{count}} trường bổ sung.",
+    "AUTO_APPROVED": "Số tiền {{amount}} nhỏ hơn ngưỡng {{threshold}}: tự động duyệt.",
+    "TIER_MATCHED": "Số tiền {{amount}} thuộc cấp [{{min}}, {{max}}): chuyển cho {{role}} duyệt.",
+    "SLA_DEADLINE": "SLA {{days}} ngày làm việc: hạn xử lý {{deadline}}.",
+    "NOTIFICATION_SENT": "Gửi thông báo \"{{event}}\" qua {{channels}}.",
+    "NOTIFICATION_DISABLED": "Sự kiện \"{{event}}\" đang tắt: không gửi thông báo.",
+    "CLAIM_REJECTED": "Yêu cầu không được chấp nhận ({{errors}} lỗi)."
+  },
+  "role": {
+    "admin": "Quản trị viên",
+    "operator": "Vận hành",
+    "viewer": "Chỉ xem"
+  },
+  "permission": {
+    "users": {
+      "read": "Xem người dùng và vai trò",
+      "manage": "Quản lý người dùng"
+    },
+    "tenants": {
+      "read": "Xem cấu hình công ty bảo hiểm",
+      "manage": "Tạo và sửa cấu hình công ty bảo hiểm"
+    },
+    "claims": {
+      "read": "Xem yêu cầu bồi thường đã xử lý",
+      "process": "Gửi yêu cầu bồi thường để xử lý"
+    }
+  }
+}

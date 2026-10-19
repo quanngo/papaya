@@ -1,0 +1,46 @@
+{
+  "slug": "safeguard",
+  "config": {
+    "branding": {
+      "company_name": "SafeGuard Insurance",
+      "logo_url": "https://placehold.co/160x48/0B3D91/FFFFFF?text=SafeGuard",
+      "primary_color": "#0B3D91",
+      "secondary_color": "#F2A900"
+    },
+    "claim_types": {
+      "enabled": ["OUTPATIENT", "INPATIENT", "DENTAL"],
+      "documents": {
+        "OUTPATIENT": { "required": ["invoice", "prescription", "medical_report"], "optional": ["lab_results"] },
+        "INPATIENT": { "required": ["invoice", "discharge_summary", "medical_report"], "optional": ["surgery_report", "itemized_bill"] },
+        "DENTAL": { "required": ["invoice", "dental_treatment_record"], "optional": ["xray"] }
+      }
+    },
+    "approval": {
+      "auto_approval_threshold": 20000,
+      "tiers": [
+        { "min_amount": 20000, "max_amount": 100000, "role": "assessor" },
+        { "min_amount": 100000, "max_amount": 500000, "role": "team_lead" },
+        { "min_amount": 500000, "max_amount": null, "role": "director" }
+      ]
+    },
+    "notifications": {
+      "events": {
+        "claim_submitted": { "enabled": true, "channels": ["email"] },
+        "approved": { "enabled": true, "channels": ["email"], "template": "Dear {{member_name}}, your claim {{claim_id}} of {{amount}} has been approved." },
+        "rejected": { "enabled": true, "channels": ["email"] },
+        "payment_sent": { "enabled": true, "channels": ["email"] }
+      }
+    },
+    "sla": {
+      "timezone": "Asia/Ho_Chi_Minh",
+      "targets": { "OUTPATIENT": 5, "INPATIENT": 10, "DENTAL": 5 },
+      "escalation": [
+        { "after_breach_days": 1, "notify": ["team_lead"] },
+        { "after_breach_days": 3, "notify": ["director"] }
+      ]
+    },
+    "custom_fields": [
+      { "key": "employee_id", "label": "Employee ID", "type": "text", "required": true, "pattern": "^EMP-[0-9]{5}$" }
+    ]
+  }
+}

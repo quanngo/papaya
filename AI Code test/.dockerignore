@@ -1,0 +1,13 @@
+# Keep the build context small and free of local state/secrets.
+**/node_modules
+**/dist
+**/test-results
+**/playwright-report
+workspace/backend/data
+workspace/backend/config/application.yml
+workspace/backend/config/.env
+workspace/backend/go.sum
+.claude
+.workflow
+*.md
+!workspace/backend/API_DOCUMENT.md

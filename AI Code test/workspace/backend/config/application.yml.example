@@ -1,0 +1,27 @@
+# Copy to config/application.yml (gitignored). Secrets are never written here:
+# use "${VAR}" placeholders, filled from the environment or config/.env.
+# Every key is optional; missing ones fall back to the defaults below.
+# DATABASE_URL, STATIC_DIR and PORT from the environment always override this file.
+
+server:
+  port: 8080
+  static-dir: ../frontend/dist   # built frontend served on "/"; empty = API only
+  swagger: true                  # Swagger UI at /swagger/index.html
+
+database:
+  # Local file (default):
+  #   file:./data/app.db?_pragma=foreign_keys(1)&_pragma=busy_timeout(5000)&_pragma=journal_mode(WAL)
+  # Turso (production):
+  #   libsql://<db>-<org>.turso.io?authToken=<token>
+  url: "${DATABASE_URL}"
+  auto-migrate: true             # apply pending migrations/*.sql on start
+  seed: true                     # insert seed/*.json tenants when the tenant table is empty
+
+auth:
+  session-ttl-hours: 12          # session without "remember me" (cookie dies with the browser)
+  remember-me-days: 7
+  min-password-length: 10
+  max-failed-logins: 5
+  lockout-minutes: 15
+  cookie-name: session
+  cookie-secure: false           # set true whenever the site is served over https
