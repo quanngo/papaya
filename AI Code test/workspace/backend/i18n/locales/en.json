@@ -41,7 +41,7 @@
     "FIELD_LABEL_EMPTY": "The field label cannot be empty.",
     "FIELD_TYPE_UNKNOWN": "Field type \"{{type}}\" is not valid.",
     "FIELD_OPTIONS_REQUIRED": "A select field needs at least one option.",
-    "FIELD_PATTERN_INVALID": "The validation pattern (regex) is not valid.",
+    "FIELD_PATTERN_INVALID": "The format is not valid. Use a format mask, e.g. AAA-9999.",
     "THRESHOLD_NEGATIVE": "The auto-approval threshold must be zero or more.",
     "NO_TIER": "Add at least one approval tier.",
     "TIER_START_MISMATCH": "The first tier must start at the auto-approval threshold ({{expected}}).",
@@ -64,19 +64,22 @@
     "FIELD_REQUIRED": "\"{{field}}\" is required.",
     "FIELD_NOT_NUMBER": "\"{{field}}\" must be a number.",
     "FIELD_NOT_IN_OPTIONS": "The value of \"{{field}}\" is not one of the allowed options.",
-    "FIELD_PATTERN_MISMATCH": "The value of \"{{field}}\" has the wrong format ({{pattern}}).",
-    "NO_MATCHING_TIER": "No approval tier covers the amount {{amount}}."
+    "FIELD_PATTERN_MISMATCH": "The value of \"{{field}}\" has the wrong format. A valid example: {{pattern}}.",
+    "NO_MATCHING_TIER": "No approval tier covers the amount {{amount}}.",
+    "FIELD_PATTERN_MISMATCH_CUSTOM": "The value of \"{{field}}\" does not match the format the insurer requires."
   },
   "trace": {
     "CLAIM_TYPE_ENABLED": "{{claim_type}} is offered by this insurer.",
     "DOCUMENTS_REQUIRED": "{{count}} required documents, {{missing}} missing.",
     "CUSTOM_FIELDS_CHECKED": "Checked {{count}} custom fields.",
     "AUTO_APPROVED": "Amount {{amount}} is below the threshold {{threshold}}: auto-approved.",
-    "TIER_MATCHED": "Amount {{amount}} falls in tier [{{min}}, {{max}}): routed to {{role}}.",
+    "TIER_MATCHED": "Amount {{amount}} falls in the tier from {{min}} to under {{max}}: routed to {{role}}.",
     "SLA_DEADLINE": "SLA of {{days}} business days: due {{deadline}}.",
     "NOTIFICATION_SENT": "Send \"{{event}}\" via {{channels}}.",
     "NOTIFICATION_DISABLED": "Event \"{{event}}\" is off: no notification.",
-    "CLAIM_REJECTED": "Claim not accepted ({{errors}} problems)."
+    "CLAIM_REJECTED": "Claim not accepted ({{errors}} problems).",
+    "TIER_MATCHED_OPEN": "Amount {{amount}} falls in the tier from {{min}} upwards: routed to {{role}}.",
+    "DOCUMENTS_COMPLETE": "All {{count}} required documents provided."
   },
   "role": {
     "admin": "Administrator",
@@ -96,5 +99,33 @@
       "read": "View processed claims",
       "process": "Submit claims for processing"
     }
+  },
+  "claim_type": {
+    "OUTPATIENT": "Outpatient",
+    "INPATIENT": "Inpatient",
+    "DENTAL": "Dental",
+    "MATERNITY": "Maternity",
+    "OPTICAL": "Optical"
+  },
+  "event": {
+    "claim_submitted": "Claim submitted",
+    "approved": "Approved",
+    "rejected": "Rejected",
+    "payment_sent": "Payment sent"
+  },
+  "channel": {
+    "email": "Email",
+    "sms": "SMS",
+    "webhook": "Webhook"
+  },
+  "role_name": {
+    "assessor": "Claims assessor",
+    "team_lead": "Team lead",
+    "director": "Director",
+    "manager": "Manager",
+    "committee": "Review committee",
+    "medical_director": "Medical director",
+    "committee_chair": "Committee chair",
+    "ministry_liaison": "Ministry liaison"
   }
 }

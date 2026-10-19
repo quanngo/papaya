@@ -73,13 +73,12 @@ func (ApprovalModule) Process(cfg *models.TenantConfig, claim *models.Claim, _ *
 			res.Approval.ApproverRole = t.Role
 			res.Approval.Tier = &tier
 			res.Approval.TierIndex = &n
-			max := "∞"
-			if t.MaxAmount != nil {
-				max = formatAmount(*t.MaxAmount)
+			// Numbers stay numbers: the HTTP layer formats them for the reader's language.
+			if t.MaxAmount == nil {
+				trace(res, "approval", "TIER_MATCHED_OPEN", map[string]any{"amount": claim.Amount, "min": t.MinAmount, "role": t.Role})
+			} else {
+				trace(res, "approval", "TIER_MATCHED", map[string]any{"amount": claim.Amount, "min": t.MinAmount, "max": *t.MaxAmount, "role": t.Role})
 			}
-			trace(res, "approval", "TIER_MATCHED", map[string]any{
-				"amount": claim.Amount, "min": formatAmount(t.MinAmount), "max": max, "role": t.Role,
-			})
 			return
 		}
 	}

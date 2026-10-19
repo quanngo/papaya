@@ -1,9 +1,51 @@
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import FieldIssues from '../../components/FieldIssues'
+import { describeMask, exampleFromMask, maskToRegex, regexToMask } from '../../tenant/pattern'
 import TagInput from '../../components/TagInput'
 import ui from '../../components/ui.module.css'
 import { issuesAt } from '../../tenant/configState'
 import styles from './sections.module.css'
+
+/**
+ * Format as a mask ("AAA-9999") instead of a regex; the regex is still what
+ * gets stored. A stored regex a mask cannot express stays editable as is.
+ */
+function PatternField({ value, onChange, invalid }) {
+  const { t } = useTranslation()
+  const mask = regexToMask(value)
+  const [raw, setRaw] = useState(mask === null)
+
+  if (raw || mask === null) {
+    return (
+      <label className={ui.field}>
+        <span className={ui.label}>{t('pattern.customLabel')}</span>
+        <input value={value} className={ui.mono} aria-invalid={invalid || undefined} onChange={(e) => onChange(e.target.value)} />
+        <span className={ui.hint}>
+          {t('pattern.customHint')}{' '}
+          {regexToMask(value) !== null && (
+            <button type="button" className={ui.linkButton} onClick={() => setRaw(false)}>
+              {t('pattern.useMask')}
+            </button>
+          )}
+        </span>
+      </label>
+    )
+  }
+  return (
+    <label className={ui.field}>
+      <span className={ui.label}>{t('pattern.label')}</span>
+      <input value={mask} placeholder={t('pattern.placeholder')} className={ui.mono} aria-invalid={invalid || undefined} onChange={(e) => onChange(maskToRegex(e.target.value))} />
+      <span className={ui.hint}>{mask ? t('pattern.accepts', { example: exampleFromMask(mask), description: describeMask(mask, t) }) : t('pattern.legend')}</span>
+      {mask && <span className={ui.hint}>{t('pattern.legend')}</span>}
+      <span className={ui.hint}>
+        <button type="button" className={ui.linkButton} onClick={() => setRaw(true)}>
+          {t('pattern.useRegex')}
+        </button>
+      </span>
+    </label>
+  )
+}
 
 /** @param {import('./index').SectionProps} props */
 export default function CustomFieldsSection({ config, update, issues, meta }) {
@@ -21,11 +63,12 @@ export default function CustomFieldsSection({ config, update, issues, meta }) {
             <div className={styles.fieldGrid}>
               <label className={ui.field}>
                 <span className={ui.label}>{t('customFields.key')}</span>
-                <input value={f.key} placeholder="employee_id" aria-invalid={issuesAt(issues, `${p}.key`).length > 0 || undefined} onChange={(e) => setField(i, { key: e.target.value })} />
+                <input value={f.key} placeholder={t('customFields.keyPlaceholder')} aria-invalid={issuesAt(issues, `${p}.key`).length > 0 || undefined} onChange={(e) => setField(i, { key: e.target.value })} />
+                <span className={ui.hint}>{t('customFields.keyHint')}</span>
               </label>
               <label className={ui.field}>
                 <span className={ui.label}>{t('customFields.label')}</span>
-                <input value={f.label} placeholder="Employee ID" aria-invalid={issuesAt(issues, `${p}.label`).length > 0 || undefined} onChange={(e) => setField(i, { label: e.target.value })} />
+                <input value={f.label} placeholder={t('customFields.labelPlaceholder')} aria-invalid={issuesAt(issues, `${p}.label`).length > 0 || undefined} onChange={(e) => setField(i, { label: e.target.value })} />
               </label>
               <label className={ui.field}>
                 <span className={ui.label}>{t('customFields.type')}</span>
@@ -37,10 +80,7 @@ export default function CustomFieldsSection({ config, update, issues, meta }) {
                   ))}
                 </select>
               </label>
-              <label className={ui.field}>
-                <span className={ui.label}>{t('customFields.pattern')}</span>
-                <input value={f.pattern || ''} placeholder="^[A-Z]{3}-[0-9]{4}$" className={ui.mono} onChange={(e) => setField(i, { pattern: e.target.value })} />
-              </label>
+              <PatternField value={f.pattern || ''} onChange={(pattern) => setField(i, { pattern })} invalid={issuesAt(issues, `${p}.pattern`).length > 0} />
             </div>
             {f.type === 'select' && (
               <div className={ui.field}>

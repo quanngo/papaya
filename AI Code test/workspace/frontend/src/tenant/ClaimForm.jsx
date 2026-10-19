@@ -2,6 +2,8 @@ import { useTranslation } from 'react-i18next'
 import TagInput from '../components/TagInput'
 import ui from '../components/ui.module.css'
 import { toNumber } from './configState'
+import { docLabel } from './labels'
+import { patternText, readablePattern } from './pattern'
 
 /**
  * @typedef {Object} ClaimDraft
@@ -61,7 +63,7 @@ export default function ClaimForm({ value, onChange, claimTypes, fields = [] }) 
         <label className={ui.label} htmlFor="claim-documents">
           {t('claim.documents')}
         </label>
-        <TagInput id="claim-documents" value={value.documents} onChange={(v) => set('documents', v)} placeholder={t('claim.documentsPlaceholder')} />
+        <TagInput id="claim-documents" formatLabel={(d) => docLabel(t, d)} value={value.documents} onChange={(v) => set('documents', v)} placeholder={t('claim.documentsPlaceholder')} />
       </div>
       {fields.length > 0 && (
         <div className={ui.grid2}>
@@ -83,11 +85,12 @@ export default function ClaimForm({ value, onChange, claimTypes, fields = [] }) 
                 <input
                   type={f.type === 'number' ? 'number' : 'text'}
                   value={value.custom_fields[f.key] ?? ''}
-                  placeholder={f.pattern || ''}
+                  placeholder={readablePattern(f.pattern, t).example ? t('claim.fieldExample', { example: readablePattern(f.pattern, t).example }) : t('claim.fieldPlaceholder', { label: f.label })}
                   onChange={(e) => set('custom_fields', { ...value.custom_fields, [f.key]: e.target.value })}
                 />
               )}
-              {f.tenants && <span className={ui.hint}>{f.tenants.join(', ')}</span>}
+              {f.pattern && <span className={ui.hint}>{t('claim.patternHint', { pattern: patternText(f.pattern, t) })}</span>}
+              {f.tenants && <span className={ui.hint}>{t('claim.fieldFor', { tenants: f.tenants.join(', ') })}</span>}
             </label>
           ))}
         </div>

@@ -74,7 +74,11 @@ func (ClaimTypesModule) Process(cfg *models.TenantConfig, claim *models.Claim, _
 			res.Documents.Missing = append(res.Documents.Missing, d)
 		}
 	}
-	trace(res, "claim_types", "DOCUMENTS_REQUIRED", map[string]any{
+	code := "DOCUMENTS_REQUIRED"
+	if len(res.Documents.Missing) == 0 {
+		code = "DOCUMENTS_COMPLETE"
+	}
+	trace(res, "claim_types", code, map[string]any{
 		"count":   len(rules.Required),
 		"missing": len(res.Documents.Missing),
 	})

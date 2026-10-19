@@ -1,15 +1,18 @@
 import { useTranslation } from 'react-i18next'
 import ui from '../components/ui.module.css'
 import { formatDateTime, formatMoney } from '../i18n/format'
+import { docLabel, roleLabel, timezoneLabel } from './labels'
 import styles from './ResultCard.module.css'
 
 const routingBadge = { auto_approved: ui.badgeSuccess, manual_review: ui.badgeWarning, rejected: ui.badgeDanger }
+
 
 /** How one tenant handles one claim (a ProcessResult). */
 export default function ResultCard({ result, stored = false }) {
   const { t } = useTranslation()
   const r = result
   const tier = r.approval.tier
+  const docs = (list) => list.map((d) => docLabel(t, d)).join(', ')
 
   return (
     <article className={`${ui.card} ${styles.card}`} aria-label={r.tenant.name || r.tenant.slug}>
@@ -17,7 +20,7 @@ export default function ResultCard({ result, stored = false }) {
         <div>
           <h3 className={styles.name}>{r.tenant.name || t('preview.unsavedConfig')}</h3>
           <span className={ui.muted}>
-            {r.tenant.config_version ? t('tenant.versionN', { n: r.tenant.config_version }) : t('preview.unsavedConfig')}
+            {r.tenant.config_version ? t('result.configVersion', { n: r.tenant.config_version }) : t('preview.unsavedConfig')}
             {stored && r.claim_id && ` · ${t('preview.stored')}`}
           </span>
         </div>
@@ -38,9 +41,9 @@ export default function ResultCard({ result, stored = false }) {
           {r.approval.routing === 'auto_approved' && t('result.autoApproved', { threshold: formatMoney(r.approval.threshold) })}
           {r.approval.routing === 'manual_review' && (
             <>
-              <strong>{r.approval.approver_role}</strong>{' '}
+              <strong>{roleLabel(t, r.approval.approver_role)}</strong>{' '}
               <span className={ui.muted}>
-                {t('result.tierRange', { min: formatMoney(tier?.min_amount), max: tier?.max_amount == null ? '∞' : formatMoney(tier.max_amount) })}
+                {tier?.max_amount == null ? t('result.tierRangeOpen', { min: formatMoney(tier?.min_amount) }) : t('result.tierRange', { min: formatMoney(tier?.min_amount), max: formatMoney(tier.max_amount) })}
               </span>
             </>
           )}
@@ -60,15 +63,15 @@ export default function ResultCard({ result, stored = false }) {
 
         <dt>{t('result.documents')}</dt>
         <dd>
-          {r.documents.required.length === 0 ? '—' : r.documents.required.join(', ')}
+          {r.documents.required.length === 0 ? '—' : docs(r.documents.required)}
           {r.documents.optional.length > 0 && (
             <div className={ui.muted}>
-              {t('result.optional')}: {r.documents.optional.join(', ')}
+              {t('result.optional')}: {docs(r.documents.optional)}
             </div>
           )}
           {r.documents.missing.length > 0 && (
             <div className={styles.missing}>
-              {t('result.missing')}: {r.documents.missing.join(', ')}
+              {t('result.missing')}: {docs(r.documents.missing)}
             </div>
           )}
         </dd>
@@ -78,7 +81,7 @@ export default function ResultCard({ result, stored = false }) {
           {r.sla ? (
             <>
               {t('result.slaDays', { days: r.sla.business_days })} → <strong>{formatDateTime(r.sla.deadline, r.sla.timezone)}</strong>
-              <div className={ui.muted}>{r.sla.timezone}</div>
+              <div className={ui.muted}>{timezoneLabel(t, r.sla.timezone)}</div>
             </>
           ) : (
             '—'
@@ -91,8 +94,10 @@ export default function ResultCard({ result, stored = false }) {
             ? t('result.none')
             : r.custom_fields.map((f) => (
                 <div key={f.key} className={f.valid ? undefined : styles.missing}>
-                  {f.label}
-                  {f.required ? '*' : ''}: {f.value === null || f.value === undefined || f.value === '' ? '—' : String(f.value)} {f.valid ? '✓' : `✗ ${f.text || ''}`}
+                  {f.required ? t('result.fieldRequired', { label: f.label }) : f.label}:{' '}
+                  {f.value === null || f.value === undefined || f.value === '' ? t('result.notEntered') : String(f.value)} {f.valid ? '✓' : '✗'}
+                  {/* "required" is already said by the value being empty; other problems (e.g. wrong format) are spelled out */}
+                  {!f.valid && f.code !== 'FIELD_REQUIRED' && f.text && <div className={styles.fieldNote}>{f.text}</div>}
                 </div>
               ))}
         </dd>

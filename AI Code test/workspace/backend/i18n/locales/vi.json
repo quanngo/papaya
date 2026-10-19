@@ -41,7 +41,7 @@
     "FIELD_LABEL_EMPTY": "Nhãn trường không được để trống.",
     "FIELD_TYPE_UNKNOWN": "Kiểu trường \"{{type}}\" không hợp lệ.",
     "FIELD_OPTIONS_REQUIRED": "Trường lựa chọn phải có ít nhất một giá trị.",
-    "FIELD_PATTERN_INVALID": "Biểu thức kiểm tra (regex) không hợp lệ.",
+    "FIELD_PATTERN_INVALID": "Định dạng không hợp lệ. Hãy dùng định dạng mẫu, vd: AAA-9999.",
     "THRESHOLD_NEGATIVE": "Ngưỡng tự động duyệt phải lớn hơn hoặc bằng 0.",
     "NO_TIER": "Phải có ít nhất một cấp duyệt.",
     "TIER_START_MISMATCH": "Cấp duyệt đầu tiên phải bắt đầu từ ngưỡng tự động duyệt ({{expected}}).",
@@ -64,19 +64,22 @@
     "FIELD_REQUIRED": "Trường \"{{field}}\" là bắt buộc.",
     "FIELD_NOT_NUMBER": "Trường \"{{field}}\" phải là số.",
     "FIELD_NOT_IN_OPTIONS": "Giá trị của \"{{field}}\" không nằm trong danh sách cho phép.",
-    "FIELD_PATTERN_MISMATCH": "Giá trị của \"{{field}}\" không đúng định dạng ({{pattern}}).",
-    "NO_MATCHING_TIER": "Không có cấp duyệt nào cho số tiền {{amount}}."
+    "FIELD_PATTERN_MISMATCH": "Giá trị của \"{{field}}\" không đúng định dạng. Ví dụ đúng: {{pattern}}.",
+    "NO_MATCHING_TIER": "Không có cấp duyệt nào cho số tiền {{amount}}.",
+    "FIELD_PATTERN_MISMATCH_CUSTOM": "Giá trị của \"{{field}}\" không đúng định dạng công ty yêu cầu."
   },
   "trace": {
     "CLAIM_TYPE_ENABLED": "Loại {{claim_type}} được công ty hỗ trợ.",
     "DOCUMENTS_REQUIRED": "Cần {{count}} chứng từ bắt buộc, còn thiếu {{missing}}.",
     "CUSTOM_FIELDS_CHECKED": "Đã kiểm tra {{count}} trường bổ sung.",
     "AUTO_APPROVED": "Số tiền {{amount}} nhỏ hơn ngưỡng {{threshold}}: tự động duyệt.",
-    "TIER_MATCHED": "Số tiền {{amount}} thuộc cấp [{{min}}, {{max}}): chuyển cho {{role}} duyệt.",
+    "TIER_MATCHED": "Số tiền {{amount}} thuộc cấp từ {{min}} đến dưới {{max}}: chuyển cho {{role}} duyệt.",
     "SLA_DEADLINE": "SLA {{days}} ngày làm việc: hạn xử lý {{deadline}}.",
     "NOTIFICATION_SENT": "Gửi thông báo \"{{event}}\" qua {{channels}}.",
     "NOTIFICATION_DISABLED": "Sự kiện \"{{event}}\" đang tắt: không gửi thông báo.",
-    "CLAIM_REJECTED": "Yêu cầu không được chấp nhận ({{errors}} lỗi)."
+    "CLAIM_REJECTED": "Yêu cầu không được chấp nhận ({{errors}} lỗi).",
+    "TIER_MATCHED_OPEN": "Số tiền {{amount}} thuộc cấp từ {{min}} trở lên: chuyển cho {{role}} duyệt.",
+    "DOCUMENTS_COMPLETE": "Đã đủ {{count}} chứng từ bắt buộc."
   },
   "role": {
     "admin": "Quản trị viên",
@@ -96,5 +99,33 @@
       "read": "Xem yêu cầu bồi thường đã xử lý",
       "process": "Gửi yêu cầu bồi thường để xử lý"
     }
+  },
+  "claim_type": {
+    "OUTPATIENT": "Ngoại trú",
+    "INPATIENT": "Nội trú",
+    "DENTAL": "Nha khoa",
+    "MATERNITY": "Thai sản",
+    "OPTICAL": "Nhãn khoa"
+  },
+  "event": {
+    "claim_submitted": "Đã nộp yêu cầu",
+    "approved": "Đã duyệt",
+    "rejected": "Bị từ chối",
+    "payment_sent": "Đã thanh toán"
+  },
+  "channel": {
+    "email": "Email",
+    "sms": "SMS",
+    "webhook": "Webhook"
+  },
+  "role_name": {
+    "assessor": "Chuyên viên thẩm định",
+    "team_lead": "Trưởng nhóm",
+    "director": "Giám đốc",
+    "manager": "Quản lý",
+    "committee": "Hội đồng xét duyệt",
+    "medical_director": "Giám đốc y khoa",
+    "committee_chair": "Chủ tịch hội đồng",
+    "ministry_liaison": "Cán bộ liên lạc Bộ"
   }
 }

@@ -38,9 +38,9 @@ Validation runs live on the server while you type. Problems show under the field
    | Insurer | Approval | Notifications | Required documents | SLA |
    |---|---|---|---|---|
    | SafeGuard | **Auto-approved** (below 20,000) | email: submitted + approved | invoice, prescription, medical_report | 5 business days |
-   | HealthFirst | **assessor** (tier 5,000–50,000) | email + SMS | invoice, prescription | 7 business days |
-   | GovHealth | **committee** (threshold 0) | email + webhook | + referral_letter | 15 business days |
-   | CareLink | **assessor** (tier 10,000–200,000) | email + webhook | invoice | 3 business days |
+   | HealthFirst | **Claims assessor** (tier 5,000–50,000) | email + SMS | invoice, prescription | 7 business days |
+   | GovHealth | **Review committee** (threshold 0) | email + webhook | + referral_letter | 15 business days |
+   | CareLink | **Claims assessor** (tier 10,000–200,000) | email + webhook | invoice | 3 business days |
 
    Expand **Step-by-step explanation** on a card to see why each decision was made.
 4. Change the claim type to **Dental** and preview again. GovHealth answers *Not accepted: "This insurer does not offer DENTAL"*.

@@ -5,7 +5,18 @@ import { diffTenants, getTenant, getVersion, listTenants, listVersions } from '.
 import { actionErrorMessage } from '../auth/errorMessages'
 import Spinner from '../components/Spinner'
 import ui from '../components/ui.module.css'
-import ChangesTable, { flatten } from '../tenant/ChangesTable'
+import ChangesTable, { groupBySection } from '../tenant/ChangesTable'
+import { describeValue, flatten } from '../tenant/humanize'
+
+const isEmpty = (v) => v === null || v === undefined || v === '' || (Array.isArray(v) && v.length === 0)
+
+/** Same comparison rules as the backend diff: empty values are equal, plain lists compare as sets. */
+function sameValue(a, b) {
+  if ((a === undefined) !== (b === undefined)) return false // the setting exists on one side only
+  if (isEmpty(a) && isEmpty(b)) return true
+  if (Array.isArray(a) && Array.isArray(b)) return a.length === b.length && a.every((v) => b.includes(v))
+  return a === b
+}
 import styles from './DiffPage.module.css'
 
 /** "slug@3" -> { tenant: 'slug', version: '3' } */
@@ -102,12 +113,14 @@ export default function DiffPage() {
   }
 
   const label = (side) => (side ? `${side.name} · v${side.version}` : '')
-  const rows = useMemo(() => {
+  // Full view: every field of both configs, in form order, grouped by area.
+  const groups = useMemo(() => {
     if (!configs) return []
     const [l, r] = configs.map((c) => flatten(c))
-    const paths = [...new Set([...l.keys(), ...r.keys()])].sort()
-    return paths.map((p) => ({ path: p, left: l.get(p) ?? '—', right: r.get(p) ?? '—' }))
-  }, [configs])
+    const paths = [...new Set([...l.keys(), ...r.keys()])]
+    const rows = paths.map((p) => ({ path: p, left: l.get(p), right: r.get(p), differs: sameValue(l.get(p), r.get(p)) === false }))
+    return groupBySection(rows, t)
+  }, [configs, t])
 
   if (!tenants && !error) return <Spinner label={t('common.loading')} />
   return (
@@ -120,11 +133,11 @@ export default function DiffPage() {
       </div>
 
       <div className={`${ui.card} ${styles.pickers}`}>
-        <SidePicker label="A" value={a} onChange={(v) => setSide('a', v)} tenants={tenants || []} />
+        <SidePicker label={t('diff.side', { side: 'A' })} value={a} onChange={(v) => setSide('a', v)} tenants={tenants || []} />
         <button type="button" className={ui.button} aria-label={t('diff.swap')} onClick={() => setParams(new URLSearchParams({ ...(refB && { a: refB }), ...(refA && { b: refA }) }), { replace: true })} disabled={!refA && !refB}>
           ⇄
         </button>
-        <SidePicker label="B" value={b} onChange={(v) => setSide('b', v)} tenants={tenants || []} />
+        <SidePicker label={t('diff.side', { side: 'B' })} value={b} onChange={(v) => setSide('b', v)} tenants={tenants || []} />
       </div>
 
       {error && (
@@ -148,7 +161,7 @@ export default function DiffPage() {
             <ChangesTable changes={diff.changes} leftLabel={label(diff.a)} rightLabel={label(diff.b)} />
           ) : (
             <div className={ui.tableWrap}>
-              <table className={ui.table}>
+              <table className={`${ui.table} ${styles.full}`}>
                 <thead>
                   <tr>
                     <th>{t('diff.field')}</th>
@@ -156,15 +169,22 @@ export default function DiffPage() {
                     <th>{label(diff.b)}</th>
                   </tr>
                 </thead>
-                <tbody>
-                  {rows.map((row) => (
-                    <tr key={row.path} className={row.left !== row.right ? styles.differs : undefined}>
-                      <td className={ui.mono}>{row.path}</td>
-                      <td className={ui.mono}>{row.left}</td>
-                      <td className={ui.mono}>{row.right}</td>
+                {groups.map((g) => (
+                  <tbody key={g.section}>
+                    <tr>
+                      <th colSpan={3} className={styles.group}>
+                        {g.section}
+                      </th>
                     </tr>
-                  ))}
-                </tbody>
+                    {g.items.map((row) => (
+                      <tr key={row.path} className={row.differs ? styles.differs : undefined} title={row.path}>
+                        <td>{row.label || g.section}</td>
+                        <td>{describeValue(row.path, row.left, t)}</td>
+                        <td>{describeValue(row.path, row.right, t)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                ))}
               </table>
             </div>
           )}

@@ -3,6 +3,7 @@ import FieldIssues from '../../components/FieldIssues'
 import TagInput from '../../components/TagInput'
 import ui from '../../components/ui.module.css'
 import { issuesAt, toggleClaimType } from '../../tenant/configState'
+import { docLabel } from '../../tenant/labels'
 import styles from './sections.module.css'
 
 /** @param {import('./index').SectionProps} props */
@@ -37,14 +38,14 @@ export default function ClaimTypesSection({ config, update, replace, issues, met
                 <label className={ui.label} htmlFor={`${base}.required`}>
                   {t('claimTypesSection.required')}
                 </label>
-                <TagInput id={`${base}.required`} value={docs.required} onChange={(v) => update(`${base}.required`, v)} placeholder={t('claimTypesSection.documentPlaceholder')} invalid={issuesAt(issues, `${base}.required`, true).length > 0} />
+                <TagInput id={`${base}.required`} formatLabel={(d) => docLabel(t, d)} value={docs.required} onChange={(v) => update(`${base}.required`, v)} placeholder={t('claimTypesSection.documentPlaceholder')} invalid={issuesAt(issues, `${base}.required`, true).length > 0} />
                 <FieldIssues issues={issuesAt(issues, `${base}.required`, true)} />
               </div>
               <div className={ui.field}>
                 <label className={ui.label} htmlFor={`${base}.optional`}>
                   {t('claimTypesSection.optional')}
                 </label>
-                <TagInput id={`${base}.optional`} value={docs.optional} onChange={(v) => update(`${base}.optional`, v)} placeholder={t('claimTypesSection.documentPlaceholder')} />
+                <TagInput id={`${base}.optional`} formatLabel={(d) => docLabel(t, d)} value={docs.optional} onChange={(v) => update(`${base}.optional`, v)} placeholder={t('claimTypesSection.documentPlaceholder')} />
                 <FieldIssues issues={issuesAt(issues, `${base}.optional`, true)} />
               </div>
             </div>

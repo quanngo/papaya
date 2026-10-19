@@ -98,7 +98,8 @@
     "previewNeedsValid": "Sửa các lỗi cấu hình để xem trước.",
     "unsaved": "Chưa lưu",
     "sectionNav": "Đi tới phần cấu hình",
-    "saveShortcut": "Ctrl+S / ⌘S để lưu"
+    "saveShortcut": "Ctrl+S / ⌘S để lưu",
+    "slugPlaceholder": "vd: bao-hiem-abc"
   },
   "sections": {
     "branding": "Thương hiệu",
@@ -120,7 +121,8 @@
       "loading": "Đang tải logo…",
       "ok": "Xem trước logo.",
       "error": "Không tải được ảnh từ URL này: đang hiển thị chữ viết tắt."
-    }
+    },
+    "logoUrlPlaceholder": "Dán đường dẫn ảnh, vd: https://congty.vn/logo.png"
   },
   "claimTypesSection": {
     "enabled": "Loại yêu cầu được hỗ trợ",
@@ -132,25 +134,28 @@
   "approval": {
     "threshold": "Ngưỡng tự động duyệt",
     "thresholdHint": "Yêu cầu dưới ngưỡng này được duyệt tự động. Đặt 0 để mọi yêu cầu đều phải duyệt tay.",
-    "from": "Từ (≥)",
-    "to": "Đến (<)",
+    "from": "Từ số tiền",
+    "to": "Đến dưới",
     "role": "Vai trò duyệt",
     "fromN": "Cấp {{n}}: từ",
     "toN": "Cấp {{n}}: đến",
     "roleN": "Cấp {{n}}: vai trò",
     "addTier": "Thêm cấp duyệt",
-    "removeTier": "Xóa cấp {{n}}"
+    "removeTier": "Xóa cấp {{n}}",
+    "rolePlaceholder": "vd: Chuyên viên thẩm định",
+    "fromHint": "Tự động: bằng ngưỡng tự động duyệt hoặc mức \"Đến dưới\" của cấp trước"
   },
   "notifications": {
     "event": "Sự kiện",
     "enabled": "Bật",
     "template": "Mẫu nội dung",
-    "defaultTemplate": "Mẫu mặc định",
+    "defaultTemplate": "Để trống để dùng mẫu mặc định",
     "enableEvent": "Bật thông báo {{event}}",
     "channelFor": "{{channel}} cho {{event}}",
     "templateFor": "Mẫu nội dung cho {{event}}",
     "webhookUrl": "Webhook URL",
-    "webhookHint": "Bắt buộc khi có sự kiện dùng kênh webhook."
+    "webhookHint": "Bắt buộc khi có sự kiện dùng kênh webhook.",
+    "webhookPlaceholder": "vd: https://he-thong-cua-ban.vn/webhook"
   },
   "sla": {
     "timezone": "Múi giờ",
@@ -162,7 +167,11 @@
     "afterBreachDays": "Sau (ngày)",
     "notify": "Thông báo cho",
     "addRule": "Thêm quy tắc",
-    "removeRule": "Xóa quy tắc {{n}}"
+    "removeRule": "Xóa quy tắc {{n}}",
+    "defaultDaysPlaceholder": "Không đặt",
+    "daysPlaceholder": "Số ngày",
+    "useDefault": "Mặc định: {{n}}",
+    "notifyPlaceholder": "vd: Trưởng nhóm, rồi Enter"
   },
   "customFields": {
     "none": "Không có trường bổ sung.",
@@ -174,7 +183,12 @@
     "optionsPlaceholder": "Nhập lựa chọn rồi Enter",
     "required": "Bắt buộc",
     "remove": "Xóa trường",
-    "add": "Thêm trường"
+    "add": "Thêm trường",
+    "keyPlaceholder": "vd: ma_nhan_vien",
+    "keyHint": "Mã nội bộ: chữ thường không dấu, số và dấu _",
+    "labelPlaceholder": "vd: Mã nhân viên",
+    "patternPlaceholder": "Không bắt buộc",
+    "patternHint": "Kiểm tra định dạng (regex). Vd: ^NV-[0-9]{5}$ chỉ chấp nhận dạng NV-12345."
   },
   "fieldTypes": {
     "text": "Văn bản",
@@ -210,12 +224,16 @@
     "submittedAt": "Thời điểm nộp",
     "submittedAtHint": "Để trống = bây giờ.",
     "documents": "Chứng từ đã nộp",
-    "documentsPlaceholder": "invoice, prescription…"
+    "documentsPlaceholder": "Nhập tên chứng từ rồi Enter",
+    "fieldPlaceholder": "Nhập {{label}}",
+    "patternHint": "Nhập theo {{pattern}}",
+    "fieldFor": "Dùng cho: {{tenants}}",
+    "fieldExample": "vd: {{example}}"
   },
   "result": {
     "approval": "Duyệt",
     "autoApproved": "Tự động (dưới ngưỡng {{threshold}})",
-    "tierRange": "cấp [{{min}}, {{max}})",
+    "tierRange": "cấp từ {{min}} đến dưới {{max}}",
     "notifications": "Thông báo",
     "documents": "Chứng từ bắt buộc",
     "optional": "Tùy chọn",
@@ -224,7 +242,11 @@
     "slaDays": "{{days}} ngày làm việc",
     "customFields": "Trường bổ sung",
     "none": "Không có",
-    "trace": "Giải thích từng bước"
+    "trace": "Giải thích từng bước",
+    "tierRangeOpen": "cấp từ {{min}} trở lên",
+    "fieldRequired": "{{label}} (bắt buộc)",
+    "notEntered": "Chưa nhập",
+    "configVersion": "Cấu hình v{{n}}"
   },
   "preview": {
     "title": "Xem trước xử lý yêu cầu",
@@ -250,11 +272,39 @@
     "count": "{{n}} điểm khác nhau",
     "showAll": "Hiện toàn bộ cấu hình song song",
     "identical": "Hai cấu hình giống nhau.",
-    "field": "Trường",
+    "field": "Mục cấu hình",
     "kind": {
-      "added": "thêm",
-      "removed": "bỏ",
-      "changed": "đổi"
+      "added": "Thêm mới",
+      "removed": "Bỏ đi",
+      "changed": "Thay đổi"
+    },
+    "side": "Bên {{side}}",
+    "label": {
+      "documents": "Chứng từ",
+      "tiers": "Cấp duyệt",
+      "tierN": "Cấp duyệt {{n}}",
+      "tierRole": "Cấp duyệt \"{{id}}\"",
+      "targetFor": "Thời gian xử lý – {{type}}",
+      "escalationN": "Quy tắc leo thang {{n}}",
+      "fieldN": "Trường bổ sung {{n}}",
+      "fieldKey": "Trường \"{{id}}\""
+    },
+    "value": {
+      "empty": "(trống)",
+      "none": "Không có",
+      "notSet": "Chưa có",
+      "unlimited": "Không giới hạn",
+      "yes": "Có",
+      "no": "Không",
+      "days": "{{n}} ngày làm việc",
+      "tier": "{{role}}: từ {{min}} đến dưới {{max}}",
+      "tierOpen": "{{role}}: từ {{min}} trở lên",
+      "documents": "Bắt buộc: {{required}} · Tùy chọn: {{optional}}",
+      "escalation": "Sau {{n}} ngày quá hạn → báo {{notify}}",
+      "field": "{{label}} ({{type}})",
+      "fieldRequired": "{{label}} ({{type}}, bắt buộc)",
+      "eventOn": "Bật · {{channels}}",
+      "eventOff": "Tắt"
     }
   },
   "history": {
@@ -340,5 +390,55 @@
       "manual": "Cần duyệt tay",
       "autoRate": "Tỷ lệ tự động duyệt"
     }
+  },
+  "documentNames": {
+    "invoice": "Hóa đơn",
+    "prescription": "Đơn thuốc",
+    "medical_report": "Báo cáo y tế",
+    "lab_results": "Kết quả xét nghiệm",
+    "discharge_summary": "Giấy ra viện",
+    "surgery_report": "Biên bản phẫu thuật",
+    "itemized_bill": "Bảng kê chi phí",
+    "dental_treatment_record": "Hồ sơ điều trị nha khoa",
+    "xray": "Phim X-quang",
+    "birth_certificate": "Giấy khai sinh",
+    "prenatal_records": "Hồ sơ khám thai",
+    "eye_prescription": "Đơn kính",
+    "referral_letter": "Giấy chuyển viện"
+  },
+  "roleNames": {
+    "assessor": "Chuyên viên thẩm định",
+    "team_lead": "Trưởng nhóm",
+    "director": "Giám đốc",
+    "manager": "Quản lý",
+    "committee": "Hội đồng xét duyệt",
+    "medical_director": "Giám đốc y khoa",
+    "committee_chair": "Chủ tịch hội đồng",
+    "ministry_liaison": "Cán bộ liên lạc Bộ"
+  },
+  "timezones": {
+    "Asia_Ho_Chi_Minh": "Giờ Việt Nam (GMT+7)",
+    "Asia_Bangkok": "Giờ Bangkok (GMT+7)",
+    "Asia_Singapore": "Giờ Singapore (GMT+8)",
+    "Asia_Jakarta": "Giờ Jakarta (GMT+7)",
+    "Asia_Manila": "Giờ Manila (GMT+8)",
+    "Asia_Hong_Kong": "Giờ Hồng Kông (GMT+8)",
+    "UTC": "Giờ quốc tế (UTC)"
+  },
+  "pattern": {
+    "label": "Định dạng mẫu (không bắt buộc)",
+    "placeholder": "vd: AAA-9999",
+    "legend": "A = chữ in hoa · a = chữ thường · 9 = chữ số · * = chữ hoặc số · ký tự khác giữ nguyên",
+    "accepts": "Chấp nhận dạng: {{example}} ({{description}})",
+    "upper": "{{n}} chữ cái in hoa",
+    "lower": "{{n}} chữ cái thường",
+    "digits": "{{n}} chữ số",
+    "alnum": "{{n}} chữ hoặc số",
+    "summary": "dạng {{example}} ({{description}})",
+    "custom": "theo định dạng riêng của công ty",
+    "customLabel": "Định dạng riêng (nâng cao)",
+    "customHint": "Biểu thức regex dành cho người rành kỹ thuật.",
+    "useMask": "Dùng định dạng mẫu",
+    "useRegex": "Nâng cao: nhập regex"
   }
 }

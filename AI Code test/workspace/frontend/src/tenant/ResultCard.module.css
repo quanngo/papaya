@@ -6,5 +6,6 @@
 .facts dt { color: var(--text-muted); font-size: 12.5px; }
 .facts dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
 .missing { color: var(--danger); }
+.fieldNote { font-size: 12.5px; }
 .trace summary { cursor: pointer; color: var(--text-muted); }
 .trace ol { margin: 6px 0 0; padding-left: 20px; color: var(--text-muted); }

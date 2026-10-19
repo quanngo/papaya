@@ -278,7 +278,7 @@ function TenantEditPage() {
                   <label className={ui.label} htmlFor="tenant-slug">
                     {t('tenant.slug')}
                   </label>
-                  <input id="tenant-slug" value={slug} placeholder="carelink" aria-invalid={slugIssues || undefined} onChange={(e) => setSlug(e.target.value.toLowerCase())} />
+                  <input id="tenant-slug" value={slug} placeholder={t('tenant.slugPlaceholder')} aria-invalid={slugIssues || undefined} onChange={(e) => setSlug(e.target.value.toLowerCase())} />
                   <span className={ui.hint}>{t('tenant.slugHint')}</span>
                 </div>
               </section>

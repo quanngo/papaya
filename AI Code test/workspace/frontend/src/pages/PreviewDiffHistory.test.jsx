@@ -9,8 +9,8 @@ describe('claim preview', () => {
     await user.click(await screen.findByRole('button', { name: 'Xem trước (3 công ty)' }))
     const sg = await screen.findByRole('article', { name: 'SafeGuard Insurance' })
     expect(within(sg).getByText('Tự động duyệt')).toBeInTheDocument()
-    expect(within(screen.getByRole('article', { name: 'HealthFirst' })).getByText('assessor')).toBeInTheDocument()
-    expect(within(screen.getByRole('article', { name: 'GovHealth' })).getByText('committee')).toBeInTheDocument()
+    expect(within(screen.getByRole('article', { name: 'HealthFirst' })).getByText('Chuyên viên thẩm định')).toBeInTheDocument()
+    expect(within(screen.getByRole('article', { name: 'GovHealth' })).getByText('Hội đồng xét duyệt')).toBeInTheDocument()
     expect(backend.claims).toHaveLength(0) // preview stores nothing
   })
 
@@ -38,15 +38,25 @@ describe('config diff', () => {
   it('compares two tenants from the URL', async () => {
     renderApp('/diff?a=safeguard&b=govhealth', { as: 'viewer@papaya.com' })
     expect(await screen.findByRole('heading', { name: '2 điểm khác nhau' })).toBeInTheDocument()
-    expect(screen.getByText('approval.auto_approval_threshold')).toBeInTheDocument()
+    // plain words instead of config paths and raw values
+    const threshold = screen.getByText('Ngưỡng tự động duyệt').closest('tr')
+    expect(within(threshold).getByText('Thay đổi')).toBeInTheDocument()
+    expect(within(threshold).getByText('20.000')).toBeInTheDocument()
+    const removed = screen.getByText('Loại yêu cầu được hỗ trợ').closest('tr')
+    expect(within(removed).getByText('Nha khoa')).toBeInTheDocument()
+    expect(within(removed).getByText('Chưa có')).toBeInTheDocument()
+    expect(screen.queryByText('approval.auto_approval_threshold')).not.toBeInTheDocument()
   })
 
   it('shows the full configs side by side, highlighting differences', async () => {
     const { user } = renderApp('/diff?a=safeguard&b=govhealth', { as: 'viewer@papaya.com' })
     await user.click(await screen.findByLabelText('Hiện toàn bộ cấu hình song song'))
-    const row = screen.getByText('approval.auto_approval_threshold').closest('tr')
+    const row = screen.getByText('Ngưỡng tự động duyệt').closest('tr')
     expect(row).toHaveClass('differs')
-    expect(within(row).getByText('20000')).toBeInTheDocument()
+    expect(within(row).getByText('20.000')).toBeInTheDocument()
+    const tier = screen.getByText('Cấp duyệt 1 › Vai trò duyệt').closest('tr')
+    expect(within(tier).getByText('Chuyên viên thẩm định')).toBeInTheDocument()
+    expect(within(tier).getByText('Hội đồng xét duyệt')).toBeInTheDocument()
   })
 })
 

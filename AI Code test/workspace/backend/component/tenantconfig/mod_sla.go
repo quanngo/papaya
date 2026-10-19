@@ -1,7 +1,6 @@
 package tenantconfig
 
 import (
-	"strconv"
 	"strings"
 	"time"
 
@@ -85,7 +84,3 @@ func (SLAModule) Process(cfg *models.TenantConfig, claim *models.Claim, ctx *Ctx
 }
 
 func (SLAModule) DiffKeys() map[string]string { return nil }
-
-func formatAmount(v float64) string {
-	return strconv.FormatFloat(v, 'f', -1, 64)
-}

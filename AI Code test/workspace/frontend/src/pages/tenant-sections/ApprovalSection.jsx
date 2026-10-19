@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next'
 import FieldIssues from '../../components/FieldIssues'
 import ui from '../../components/ui.module.css'
 import { chainTiers, issuesAt, toNumber } from '../../tenant/configState'
+import { formatMoney } from '../../i18n/format'
 import styles from './sections.module.css'
 
 /**
@@ -65,11 +66,11 @@ export default function ApprovalSection({ config, replace, issues }) {
                 <tr key={i}>
                   <td>{i + 1}</td>
                   <td className={styles.numCell}>
-                    <input aria-label={t('approval.fromN', { n: i + 1 })} value={tier.min_amount} readOnly tabIndex={-1} className={styles.readonly} />
+                    <input aria-label={t('approval.fromN', { n: i + 1 })} value={formatMoney(tier.min_amount)} readOnly tabIndex={-1} className={styles.readonly} title={t('approval.fromHint')} />
                   </td>
                   <td className={styles.numCell}>
                     {i === last ? (
-                      <input aria-label={t('approval.toN', { n: i + 1 })} value="∞" readOnly tabIndex={-1} className={styles.readonly} />
+                      <input aria-label={t('approval.toN', { n: i + 1 })} value={t('diff.value.unlimited')} readOnly tabIndex={-1} className={styles.readonly} />
                     ) : (
                       <input
                         aria-label={t('approval.toN', { n: i + 1 })}
@@ -85,7 +86,7 @@ export default function ApprovalSection({ config, replace, issues }) {
                     <input
                       aria-label={t('approval.roleN', { n: i + 1 })}
                       value={tier.role}
-                      placeholder="assessor"
+                      placeholder={t('approval.rolePlaceholder')}
                       aria-invalid={issuesAt(issues, `${p}.role`).length > 0 || undefined}
                       onChange={(e) => setTier(i, { role: e.target.value })}
                     />

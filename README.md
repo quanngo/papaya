@@ -8,4 +8,4 @@
 
 Go + React, configuration-driven claim processing per insurer, with live validation, preview, config diff, version history and rollback. Full details are in the [project README](AI%20Code%20test/README.md).
 
-**[Logic test](Logic%20test/answer.md)**: answers to the logic and thinking questions (in Vietnamese).
+**[Logic test](Logic%20test/)**: answers to the logic and thinking questions (in Vietnamese).

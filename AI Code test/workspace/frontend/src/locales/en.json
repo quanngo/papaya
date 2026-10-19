@@ -98,7 +98,8 @@
     "previewNeedsValid": "Fix the configuration problems to preview.",
     "unsaved": "Unsaved",
     "sectionNav": "Jump to section",
-    "saveShortcut": "Ctrl+S / ⌘S to save"
+    "saveShortcut": "Ctrl+S / ⌘S to save",
+    "slugPlaceholder": "e.g. acme-insurance"
   },
   "sections": {
     "branding": "Branding",
@@ -120,7 +121,8 @@
       "loading": "Loading logo…",
       "ok": "Logo preview.",
       "error": "Could not load an image from this URL: showing initials."
-    }
+    },
+    "logoUrlPlaceholder": "Paste an image link, e.g. https://company.com/logo.png"
   },
   "claimTypesSection": {
     "enabled": "Supported claim types",
@@ -132,25 +134,28 @@
   "approval": {
     "threshold": "Auto-approval threshold",
     "thresholdHint": "Claims below this amount are approved automatically. Set 0 to review every claim manually.",
-    "from": "From (≥)",
-    "to": "To (<)",
+    "from": "From amount",
+    "to": "Up to (not incl.)",
     "role": "Approver role",
     "fromN": "Tier {{n}}: from",
     "toN": "Tier {{n}}: to",
     "roleN": "Tier {{n}}: role",
     "addTier": "Add approval tier",
-    "removeTier": "Remove tier {{n}}"
+    "removeTier": "Remove tier {{n}}",
+    "rolePlaceholder": "e.g. Claims assessor",
+    "fromHint": "Automatic: the auto-approval threshold or the previous tier's upper limit"
   },
   "notifications": {
     "event": "Event",
     "enabled": "On",
     "template": "Template",
-    "defaultTemplate": "Default template",
+    "defaultTemplate": "Leave empty to use the default message",
     "enableEvent": "Enable {{event}} notifications",
     "channelFor": "{{channel}} for {{event}}",
     "templateFor": "Template for {{event}}",
     "webhookUrl": "Webhook URL",
-    "webhookHint": "Required when an event uses the webhook channel."
+    "webhookHint": "Required when an event uses the webhook channel.",
+    "webhookPlaceholder": "e.g. https://your-system.com/webhook"
   },
   "sla": {
     "timezone": "Time zone",
@@ -162,7 +167,11 @@
     "afterBreachDays": "After (days)",
     "notify": "Notify",
     "addRule": "Add rule",
-    "removeRule": "Remove rule {{n}}"
+    "removeRule": "Remove rule {{n}}",
+    "defaultDaysPlaceholder": "Not set",
+    "daysPlaceholder": "Days",
+    "useDefault": "Default: {{n}}",
+    "notifyPlaceholder": "e.g. Team lead, then Enter"
   },
   "customFields": {
     "none": "No custom fields.",
@@ -174,7 +183,12 @@
     "optionsPlaceholder": "Type an option and press Enter",
     "required": "Required",
     "remove": "Remove field",
-    "add": "Add field"
+    "add": "Add field",
+    "keyPlaceholder": "e.g. employee_id",
+    "keyHint": "Internal code: lowercase letters, digits and _",
+    "labelPlaceholder": "e.g. Employee ID",
+    "patternPlaceholder": "Optional",
+    "patternHint": "Format check (regex). E.g. ^EMP-[0-9]{5}$ only accepts values like EMP-12345."
   },
   "fieldTypes": {
     "text": "Text",
@@ -210,12 +224,16 @@
     "submittedAt": "Submitted at",
     "submittedAtHint": "Empty = now.",
     "documents": "Submitted documents",
-    "documentsPlaceholder": "invoice, prescription…"
+    "documentsPlaceholder": "Type a document name and press Enter",
+    "fieldPlaceholder": "Enter {{label}}",
+    "patternHint": "Enter it {{pattern}}",
+    "fieldFor": "Used by: {{tenants}}",
+    "fieldExample": "e.g. {{example}}"
   },
   "result": {
     "approval": "Approval",
     "autoApproved": "Automatic (below {{threshold}})",
-    "tierRange": "tier [{{min}}, {{max}})",
+    "tierRange": "tier from {{min}} to under {{max}}",
     "notifications": "Notifications",
     "documents": "Required documents",
     "optional": "Optional",
@@ -224,7 +242,11 @@
     "slaDays": "{{days}} business days",
     "customFields": "Custom fields",
     "none": "None",
-    "trace": "Step-by-step explanation"
+    "trace": "Step-by-step explanation",
+    "tierRangeOpen": "tier from {{min}} upwards",
+    "fieldRequired": "{{label}} (required)",
+    "notEntered": "Not entered",
+    "configVersion": "Configuration v{{n}}"
   },
   "preview": {
     "title": "Claim processing preview",
@@ -250,11 +272,39 @@
     "count": "{{n}} difference(s)",
     "showAll": "Show full configurations side by side",
     "identical": "The two configurations are identical.",
-    "field": "Field",
+    "field": "Setting",
     "kind": {
-      "added": "added",
-      "removed": "removed",
-      "changed": "changed"
+      "added": "Added",
+      "removed": "Removed",
+      "changed": "Changed"
+    },
+    "side": "Side {{side}}",
+    "label": {
+      "documents": "Documents",
+      "tiers": "Approval tiers",
+      "tierN": "Approval tier {{n}}",
+      "tierRole": "Approval tier \"{{id}}\"",
+      "targetFor": "Processing time – {{type}}",
+      "escalationN": "Escalation rule {{n}}",
+      "fieldN": "Custom field {{n}}",
+      "fieldKey": "Field \"{{id}}\""
+    },
+    "value": {
+      "empty": "(empty)",
+      "none": "None",
+      "notSet": "Not set",
+      "unlimited": "No limit",
+      "yes": "Yes",
+      "no": "No",
+      "days": "{{n}} business days",
+      "tier": "{{role}}: from {{min}} to under {{max}}",
+      "tierOpen": "{{role}}: {{min}} and above",
+      "documents": "Required: {{required}} · Optional: {{optional}}",
+      "escalation": "After {{n}} days overdue → notify {{notify}}",
+      "field": "{{label}} ({{type}})",
+      "fieldRequired": "{{label}} ({{type}}, required)",
+      "eventOn": "On · {{channels}}",
+      "eventOff": "Off"
     }
   },
   "history": {
@@ -340,5 +390,55 @@
       "manual": "Need manual review",
       "autoRate": "Auto-approval rate"
     }
+  },
+  "documentNames": {
+    "invoice": "Invoice",
+    "prescription": "Prescription",
+    "medical_report": "Medical report",
+    "lab_results": "Lab results",
+    "discharge_summary": "Discharge summary",
+    "surgery_report": "Surgery report",
+    "itemized_bill": "Itemized bill",
+    "dental_treatment_record": "Dental treatment record",
+    "xray": "X-ray",
+    "birth_certificate": "Birth certificate",
+    "prenatal_records": "Prenatal records",
+    "eye_prescription": "Eyeglass prescription",
+    "referral_letter": "Referral letter"
+  },
+  "roleNames": {
+    "assessor": "Claims assessor",
+    "team_lead": "Team lead",
+    "director": "Director",
+    "manager": "Manager",
+    "committee": "Review committee",
+    "medical_director": "Medical director",
+    "committee_chair": "Committee chair",
+    "ministry_liaison": "Ministry liaison"
+  },
+  "timezones": {
+    "Asia_Ho_Chi_Minh": "Vietnam time (GMT+7)",
+    "Asia_Bangkok": "Bangkok time (GMT+7)",
+    "Asia_Singapore": "Singapore time (GMT+8)",
+    "Asia_Jakarta": "Jakarta time (GMT+7)",
+    "Asia_Manila": "Manila time (GMT+8)",
+    "Asia_Hong_Kong": "Hong Kong time (GMT+8)",
+    "UTC": "Coordinated Universal Time (UTC)"
+  },
+  "pattern": {
+    "label": "Format mask (optional)",
+    "placeholder": "e.g. AAA-9999",
+    "legend": "A = capital letter · a = lowercase letter · 9 = digit · * = letter or digit · other characters stay as typed",
+    "accepts": "Accepts: {{example}} ({{description}})",
+    "upper": "{{n}} capital letter(s)",
+    "lower": "{{n}} lowercase letter(s)",
+    "digits": "{{n}} digit(s)",
+    "alnum": "{{n}} letter(s) or digit(s)",
+    "summary": "like {{example}} ({{description}})",
+    "custom": "in the insurer's own format",
+    "customLabel": "Custom format (advanced)",
+    "customHint": "A regular expression, for technical users.",
+    "useMask": "Use a format mask",
+    "useRegex": "Advanced: enter a regex"
   }
 }

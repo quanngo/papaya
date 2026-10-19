@@ -6,7 +6,7 @@ import styles from './TagInput.module.css'
  * Edits a list of short strings (documents, channels to notify, options):
  * type and press Enter or comma to add, click × to remove.
  */
-export default function TagInput({ id, value = [], onChange, placeholder, invalid = false, describedBy }) {
+export default function TagInput({ id, value = [], onChange, placeholder, invalid = false, describedBy, formatLabel }) {
   const { t } = useTranslation()
   const [draft, setDraft] = useState('')
   const list = value || []
@@ -19,14 +19,18 @@ export default function TagInput({ id, value = [], onChange, placeholder, invali
 
   return (
     <div className={`${styles.box} ${invalid ? styles.invalid : ''}`}>
-      {list.map((item, i) => (
-        <span key={`${item}-${i}`} className={styles.tag}>
-          {item}
-          <button type="button" className={styles.remove} aria-label={t('common.removeItem', { item })} onClick={() => onChange(list.filter((_, j) => j !== i))}>
+      {list.map((item, i) => {
+        // Show a readable name; the stored value stays the code (visible on hover).
+        const shown = formatLabel ? formatLabel(item) : item
+        return (
+        <span key={`${item}-${i}`} className={styles.tag} title={shown !== item ? item : undefined}>
+          {shown}
+          <button type="button" className={styles.remove} aria-label={t('common.removeItem', { item: shown })} onClick={() => onChange(list.filter((_, j) => j !== i))}>
             ×
           </button>
         </span>
-      ))}
+        )
+      })}
       <input
         id={id}
         className={styles.input}

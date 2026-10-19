@@ -76,7 +76,7 @@ export default function NotificationsSection({ config, update, issues, meta }) {
         <input
           id="notifications.webhook_url"
           type="url"
-          placeholder="https://…"
+          placeholder={t('notifications.webhookPlaceholder')}
           value={n.webhook_url || ''}
           aria-invalid={issuesAt(issues, 'notifications.webhook_url').length > 0 || undefined}
           onChange={(e) => update('notifications.webhook_url', e.target.value)}

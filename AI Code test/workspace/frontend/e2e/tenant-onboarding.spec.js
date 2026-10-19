@@ -34,8 +34,8 @@ test('same claim, three tenants, three different outcomes', async ({ page }) => 
   await page.getByRole('button', { name: /^Xem trước \(/ }).click()
 
   await expect(page.getByRole('article', { name: 'SafeGuard Insurance' }).getByText('Tự động duyệt', { exact: true })).toBeVisible()
-  await expect(page.getByRole('article', { name: 'HealthFirst' }).getByText('assessor', { exact: true })).toBeVisible()
-  await expect(page.getByRole('article', { name: 'GovHealth' }).getByText('committee', { exact: true })).toBeVisible()
+  await expect(page.getByRole('article', { name: 'HealthFirst' }).getByText('Chuyên viên thẩm định', { exact: true })).toBeVisible()
+  await expect(page.getByRole('article', { name: 'GovHealth' }).getByText('Hội đồng xét duyệt', { exact: true })).toBeVisible()
 })
 
 test('onboard a 4th tenant through the UI and process a claim', async ({ page }) => {
@@ -56,7 +56,7 @@ test('onboard a 4th tenant through the UI and process a claim', async ({ page })
   await page.getByRole('checkbox', { name: companyName }).check()
   await page.getByRole('button', { name: 'Gửi xử lý thật (1 công ty)' }).click()
   const card = page.getByRole('article', { name: companyName })
-  await expect(card.getByText('assessor', { exact: true })).toBeVisible()
+  await expect(card.getByText('Chuyên viên thẩm định', { exact: true })).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Kết quả xử lý (đã lưu)' })).toBeVisible()
 })
 
@@ -75,5 +75,5 @@ test('save a version, roll it back, and diff versions', async ({ page }) => {
 
   await page.goto('/diff?a=safeguard&b=govhealth')
   await expect(page.getByRole('heading', { name: /điểm khác nhau/ })).toBeVisible()
-  await expect(page.getByText('approval.auto_approval_threshold')).toBeVisible()
+  await expect(page.getByText('Ngưỡng tự động duyệt').first()).toBeVisible()
 })

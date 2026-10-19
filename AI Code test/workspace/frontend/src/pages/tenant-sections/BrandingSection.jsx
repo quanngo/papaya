@@ -45,7 +45,7 @@ export default function BrandingSection({ config, update, issues }) {
           <input
             id="branding.logo_url"
             type="url"
-            placeholder="https://…"
+            placeholder={t('branding.logoUrlPlaceholder')}
             value={b.logo_url}
             aria-invalid={issuesAt(issues, 'branding.logo_url').length > 0 || logoStatus === 'error' || undefined}
             aria-describedby="logo-status"

@@ -8,6 +8,7 @@ import Spinner from '../components/Spinner'
 import ui from '../components/ui.module.css'
 import { formatDateTime, formatMoney } from '../i18n/format'
 import ResultCard from '../tenant/ResultCard'
+import { roleLabel } from '../tenant/labels'
 
 const routingBadge = { auto_approved: ui.badgeSuccess, manual_review: ui.badgeWarning, rejected: ui.badgeDanger }
 
@@ -115,7 +116,7 @@ export default function ClaimsPage() {
                       <td>{t(`claimTypes.${c.claim_type}`)}</td>
                       <td>{formatMoney(c.amount)}</td>
                       <td>
-                        <span className={`${ui.badge} ${routingBadge[c.routing]}`}>{t(`routing.${c.routing}`)}</span> {c.approver_role}
+                        <span className={`${ui.badge} ${routingBadge[c.routing]}`}>{t(`routing.${c.routing}`)}</span> {c.approver_role && roleLabel(t, c.approver_role)}
                       </td>
                       <td>{c.sla_deadline ? formatDateTime(c.sla_deadline, c.result?.sla?.timezone) : '—'}</td>
                       <td>
